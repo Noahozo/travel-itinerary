@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 黑柚柏冠・霖云同行 上海杭州烏镇奢旅 - 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -38,13 +37,28 @@
         }
 
         .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active {
+            display: block;
+            animation: tabFadeIn 280ms ease-out;
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .panel {
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 1rem;
             box-shadow: var(--shadow);
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 38px rgba(47, 43, 39, 0.11);
+            border-color: #dcc8aa;
         }
 
         .section-title {
@@ -71,6 +85,12 @@
             background: rgba(255, 253, 249, 0.82);
             border: 1px solid rgba(231, 218, 200, 0.8);
             backdrop-filter: blur(3px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .chip:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(47, 43, 39, 0.08);
         }
 
         .timeline-line::before {
@@ -138,6 +158,85 @@
             text-decoration: line-through;
             opacity: 0.65;
         }
+
+        .todo-item {
+            border: 1px solid #e9dece;
+            border-radius: 0.75rem;
+            padding: 0.55rem 0.65rem;
+            background: #fffdfa;
+        }
+
+        .todo-input-wrap {
+            border: 1px solid #d9ccb7;
+            background: #fffcf7;
+        }
+
+        .todo-input-wrap:focus-within {
+            border-color: #1f4f46;
+            box-shadow: 0 0 0 3px rgba(31, 79, 70, 0.12);
+        }
+
+        .route-map {
+            background: linear-gradient(180deg, #fffdf9 0%, #f6efe5 100%);
+            border: 1px solid #eadfce;
+            border-radius: 0.9rem;
+            padding: 1rem;
+        }
+
+        .route-line {
+            height: 3px;
+            background: linear-gradient(90deg, #1f4f46 0%, #b5874f 100%);
+            border-radius: 999px;
+        }
+
+        .route-dot {
+            width: 13px;
+            height: 13px;
+            border-radius: 999px;
+            background: #1f4f46;
+            border: 2px solid #fffdf9;
+            box-shadow: 0 2px 10px rgba(31, 79, 70, 0.28);
+            margin: 0 auto;
+        }
+
+        .route-stop {
+            min-width: 0;
+        }
+
+        .route-stop p {
+            font-size: 0.78rem;
+            line-height: 1.2;
+        }
+
+        .hero-shell {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eadfce;
+            background:
+                linear-gradient(120deg, rgba(20, 28, 25, 0.56), rgba(26, 41, 36, 0.48)),
+                radial-gradient(circle at 15% 20%, rgba(181, 135, 79, 0.2), transparent 45%),
+                url("https://www.jaccotours.com/wp-content/uploads/2014/06/%E6%B1%9F%E8%98%87%E7%9C%81%E2%80%A2%E4%B8%8A%E6%B5%B7%E2%80%A2%E4%B8%8A%E6%B5%B7%E5%A4%96%E7%81%98%E5%A4%9C%E6%99%AF.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-shell::before {
+            content: "";
+            position: absolute;
+            inset: -40% -10% auto auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(181, 135, 79, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-stat {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 253, 249, 0.18);
+            color: #f7f2ea;
+            backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body>
@@ -150,7 +249,7 @@
                     <button data-tab="itinerary" class="nav-link">每日行程</button>
                     <button data-tab="food" class="nav-link">美食地圖</button>
                     <button data-tab="spa" class="nav-link">足浴洗浴</button>
-                    <button data-tab="night" class="nav-link">夜生活娛樂</button>
+                    <button data-tab="night" class="nav-link">來個啤啤</button>
                     <button data-tab="transport" class="nav-link">交通住宿</button>
                 </div>
             </div>
@@ -159,7 +258,7 @@
                 <button data-tab="itinerary" class="nav-link inline-block mr-4 text-sm">每日行程</button>
                 <button data-tab="food" class="nav-link inline-block mr-4 text-sm">美食地圖</button>
                 <button data-tab="spa" class="nav-link inline-block mr-4 text-sm">足浴洗浴</button>
-                <button data-tab="night" class="nav-link inline-block mr-4 text-sm">夜生活娛樂</button>
+                <button data-tab="night" class="nav-link inline-block mr-4 text-sm">來個啤啤</button>
                 <button data-tab="transport" class="nav-link inline-block mr-1 text-sm">交通住宿</button>
             </div>
         </div>
@@ -167,15 +266,29 @@
 
     <header class="pt-40 md:pt-32 pb-16 px-4">
         <div class="max-w-5xl mx-auto">
-            <div class="panel p-8 md:p-12 text-center bg-gradient-to-br from-[#fff8ee] to-[#f4ede2]">
-                <p class="tracking-[0.2em] text-xs text-[#8b7e72] mb-4">SUMMER 2026 PREMIUM ITINERARY</p>
-                <h1 class="text-3xl md:text-5xl font-bold mb-3 text-[#1f4f46]">上海・杭州・烏鎮</h1>
-                <p class="text-[#6d665f] text-lg">2026/06/10 – 06/15 | 6人精奢包車遊</p>
+            <div class="panel hero-shell p-8 md:p-12 text-center">
+                <p class="tracking-[0.2em] text-xs text-[#f3e6d2] mb-4">SUMMER 2026 PREMIUM ITINERARY</p>
+                <h1 class="text-3xl md:text-5xl font-bold mb-3 text-[#fdf8f0]">上海・杭州・烏鎮</h1>
+                <p class="text-[#f7ecdf] text-lg">2026/06/10 – 06/15 | 6人精奢包車遊</p>
                 <div class="mt-8 flex justify-center gap-3 flex-wrap text-sm">
-                    <span class="chip px-4 py-2 rounded-full">#網紅打卡</span>
+                    <span class="chip px-4 py-2 rounded-full">#來個啤啤</span>
                     <span class="chip px-4 py-2 rounded-full">#足浴放鬆</span>
                     <span class="chip px-4 py-2 rounded-full">#宮廷饗宴</span>
-                    <span class="chip px-4 py-2 rounded-full">#夜生活</span>
+                    <span class="chip px-4 py-2 rounded-full">#來根小菸</span>
+                </div>
+                <div class="mt-6 grid grid-cols-3 gap-3 text-xs sm:text-sm">
+                    <div class="hero-stat rounded-xl px-2 py-2">
+                        <p class="text-[#f1dfc9]">旅遊天數</p>
+                        <p class="font-semibold">6 Days</p>
+                    </div>
+                    <div class="hero-stat rounded-xl px-2 py-2">
+                        <p class="text-[#f1dfc9]">主要城市</p>
+                        <p class="font-semibold">滬杭烏</p>
+                    </div>
+                    <div class="hero-stat rounded-xl px-2 py-2">
+                        <p class="text-[#f1dfc9]">同行人數</p>
+                        <p class="font-semibold">6 人</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,7 +299,38 @@
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="panel p-7 md:p-8">
                     <h2 class="section-title text-2xl font-bold mb-6">行程路線分析</h2>
-                    <canvas id="travelChart" height="200"></canvas>
+                    <div class="route-map">
+                        <p class="text-sm text-[#6d665f] mb-3">最佳動線（不走回頭路）</p>
+                        <div class="grid grid-cols-5 gap-2 text-center mb-2">
+                            <div class="route-stop">
+                                <div class="route-dot"></div>
+                                <p class="mt-2 text-[#1f4f46] font-semibold">台北</p>
+                            </div>
+                            <div class="route-stop">
+                                <div class="route-dot"></div>
+                                <p class="mt-2 text-[#1f4f46] font-semibold">上海</p>
+                            </div>
+                            <div class="route-stop">
+                                <div class="route-dot"></div>
+                                <p class="mt-2 text-[#1f4f46] font-semibold">杭州</p>
+                            </div>
+                            <div class="route-stop">
+                                <div class="route-dot"></div>
+                                <p class="mt-2 text-[#1f4f46] font-semibold">烏鎮</p>
+                            </div>
+                            <div class="route-stop">
+                                <div class="route-dot"></div>
+                                <p class="mt-2 text-[#1f4f46] font-semibold">上海</p>
+                            </div>
+                        </div>
+                        <div class="route-line mb-3"></div>
+                        <div class="grid grid-cols-4 gap-2 text-center text-xs text-[#7b746e]">
+                            <p>✈ 約 2hr</p>
+                            <p>🚄 約 1hr</p>
+                            <p>🚗 約 1hr</p>
+                            <p>🚗 約 1hr40m</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel p-7 md:p-8 space-y-4">
                     <h3 class="text-xl font-bold text-[#1f4f46]">為什麼這樣安排？</h3>
@@ -198,12 +342,12 @@
                     </p>
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div class="rounded-xl p-4 bg-[#f3ebe0] border border-[#e7dac8]">
-                            <p class="text-[#8b6b3e] font-semibold text-sm">總里程</p>
-                            <p class="text-2xl font-bold text-[#1f4f46]">約 380km</p>
+                            <p class="text-[#8b6b3e] font-semibold text-sm">平常心</p>
+                            <p class="text-2xl font-bold text-[#1f4f46]">沒有壓力</p>
                         </div>
                         <div class="rounded-xl p-4 bg-[#eaf3ef] border border-[#cfe0db]">
                             <p class="text-[#1f4f46] font-semibold text-sm">放鬆行程</p>
-                            <p class="text-2xl font-bold text-[#1f4f46]">3 場 SPA</p>
+                            <p class="text-2xl font-bold text-[#1f4f46]">想睡就睡</p>
                         </div>
                     </div>
                 </div>
@@ -224,6 +368,24 @@
                         <label class="todo-text cursor-pointer" for="todo-banquet">杭州宮宴還沒訂</label>
                     </li>
                 </ul>
+                <div class="mt-4 flex items-center gap-2">
+                    <div class="todo-input-wrap rounded-lg flex-1">
+                        <input
+                            id="todo-custom-input"
+                            type="text"
+                            placeholder="新增待辦事項..."
+                            class="w-full rounded-lg px-3 py-2 text-sm bg-transparent outline-none"
+                        >
+                    </div>
+                    <button
+                        id="todo-add-btn"
+                        type="button"
+                        class="rounded-lg bg-[#1f4f46] text-white px-3 py-2 text-sm hover:opacity-90 whitespace-nowrap min-w-[68px] inline-flex items-center justify-center gap-1"
+                    >
+                        <span class="text-base leading-none">+</span><span>新增</span>
+                    </button>
+                </div>
+                <ul id="todo-custom-list" class="mt-3 space-y-2 text-[#6d665f]"></ul>
             </div>
         </section>
 
@@ -438,7 +600,7 @@
             <button data-tab="itinerary" class="nav-link mobile-bottom-tab"><span>行程</span></button>
             <button data-tab="food" class="nav-link mobile-bottom-tab"><span>美食</span></button>
             <button data-tab="spa" class="nav-link mobile-bottom-tab"><span>足浴</span></button>
-            <button data-tab="night" class="nav-link mobile-bottom-tab"><span>夜生活</span></button>
+            <button data-tab="night" class="nav-link mobile-bottom-tab"><span>來個啤啤</span></button>
             <button data-tab="transport" class="nav-link mobile-bottom-tab"><span>交通</span></button>
         </div>
     </nav>
@@ -493,21 +655,55 @@
             });
         }
 
+        function getTodoStorage() {
+            const raw = JSON.parse(localStorage.getItem("trip_todos_2026") || "{}");
+            if (raw && typeof raw === "object" && "checks" in raw) return raw;
+            return { checks: raw, custom: [] };
+        }
+
+        function createCustomTodoItem(id, text, done = false) {
+            const customList = document.getElementById("todo-custom-list");
+            const li = document.createElement("li");
+            li.className = "todo-item flex items-center gap-2";
+            li.dataset.todoId = id;
+            li.innerHTML = `
+                <input class="todo-checkbox accent-[#1f4f46] w-4 h-4" type="checkbox" id="todo-${id}">
+                <label class="todo-text cursor-pointer flex-1" for="todo-${id}"></label>
+                <button type="button" class="todo-remove text-xs text-[#8f877f] hover:text-[#1f4f46] whitespace-nowrap px-2 py-1 rounded-md hover:bg-[#f2e9dc]">刪除</button>
+            `;
+            li.querySelector(".todo-text").textContent = text;
+            li.querySelector(".todo-checkbox").checked = done;
+            customList.appendChild(li);
+            li.querySelector(".todo-checkbox").addEventListener("change", saveTodos);
+            li.querySelector(".todo-remove").addEventListener("click", () => {
+                li.remove();
+                saveTodos();
+            });
+        }
+
         function loadTodos() {
-            const saved = JSON.parse(localStorage.getItem("trip_todos_2026") || "{}");
+            const saved = getTodoStorage();
             document.querySelectorAll(".todo-item").forEach(item => {
                 const checkbox = item.querySelector(".todo-checkbox");
                 const todoId = item.dataset.todoId;
-                checkbox.checked = Boolean(saved[todoId]);
+                checkbox.checked = Boolean(saved.checks[todoId]);
             });
+            document.getElementById("todo-custom-list").innerHTML = "";
+            saved.custom.forEach(item => createCustomTodoItem(item.id, item.text, item.done));
             applyTodoState();
         }
 
         function saveTodos() {
-            const data = {};
+            const data = { checks: {}, custom: [] };
             document.querySelectorAll(".todo-item").forEach(item => {
                 const checkbox = item.querySelector(".todo-checkbox");
-                data[item.dataset.todoId] = checkbox.checked;
+                const todoId = item.dataset.todoId;
+                const text = item.querySelector(".todo-text").textContent.trim();
+                if (todoId.startsWith("custom-")) {
+                    data.custom.push({ id: todoId, text, done: checkbox.checked });
+                } else {
+                    data.checks[todoId] = checkbox.checked;
+                }
             });
             localStorage.setItem("trip_todos_2026", JSON.stringify(data));
             applyTodoState();
@@ -534,29 +730,19 @@
             document.querySelectorAll(".todo-checkbox").forEach(checkbox => {
                 checkbox.addEventListener("change", saveTodos);
             });
-        }
 
-        function initChart() {
-            const ctx = document.getElementById("travelChart").getContext("2d");
-            new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels: ["台→滬", "滬→杭", "杭→烏", "烏→滬"],
-                    datasets: [{
-                        label: "預計交通時間 (分鐘)",
-                        data: [120, 60, 60, 100],
-                        backgroundColor: "rgba(31, 79, 70, 0.75)",
-                        borderRadius: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { beginAtZero: true, grid: { color: "rgba(181, 135, 79, 0.15)" } },
-                        x: { grid: { display: false } }
-                    }
-                }
+            const addCustomTodo = () => {
+                const input = document.getElementById("todo-custom-input");
+                const value = input.value.trim();
+                if (!value) return;
+                const id = `custom-${Date.now()}`;
+                createCustomTodoItem(id, value, false);
+                input.value = "";
+                saveTodos();
+            };
+            document.getElementById("todo-add-btn").addEventListener("click", addCustomTodo);
+            document.getElementById("todo-custom-input").addEventListener("keydown", (event) => {
+                if (event.key === "Enter") addCustomTodo();
             });
         }
 
@@ -566,7 +752,6 @@
             switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
             renderFood();
             loadTodos();
-            initChart();
         });
     </script>
 </body>
