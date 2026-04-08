@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 黑柚柏冠・霖云同行 上海杭州烏镇奢旅 - 2026</title>
+    <title> 黑柚柏冠・霖雲同行 上海杭州烏鎮奢旅 - 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -206,6 +206,63 @@
         .route-stop p {
             font-size: 0.78rem;
             line-height: 1.2;
+        }
+
+        .spa-filter-btn {
+            border: 1px solid var(--line);
+            color: var(--muted);
+            background: var(--surface);
+            transition: all 0.2s ease;
+        }
+
+        .spa-filter-btn.active {
+            color: #fff;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        #spa .panel {
+            border-color: #e4d6c2;
+            background: linear-gradient(180deg, #fffefb 0%, #fcf6ed 100%);
+        }
+
+        #spa ul {
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        #spa ul li {
+            list-style: none;
+            border: 1px solid #e9ddcc;
+            background: #fffdfa;
+            border-radius: 0.7rem;
+            padding: 0.55rem 0.65rem;
+            line-height: 1.55;
+        }
+
+        #spa .md\:col-span-2 .grid > div {
+            border: 1px solid #e9ddcc;
+            border-radius: 0.7rem;
+            padding: 0.65rem 0.75rem;
+            background: #fffdfa;
+        }
+
+        .hotel-photo {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 0.9rem;
+            border: 1px solid #e9ddcc;
+            margin-bottom: 0.8rem;
+        }
+
+        .transport-chip {
+            border: 1px solid #dcc8aa;
+            background: #fff9f1;
+            color: #6d665f;
+            border-radius: 999px;
+            padding: 0.22rem 0.65rem;
+            font-size: 0.78rem;
         }
 
         .hero-shell {
@@ -451,91 +508,98 @@
 
         <section id="spa" class="tab-content space-y-8">
             <h2 class="section-title text-2xl font-bold">足浴 & 洗浴中心推薦</h2>
+            <p class="text-sm text-[#7a726a]">按「杭州足浴 / 上海足浴 / 高端湯泉」分組，挑選更直觀。</p>
+            <div class="flex flex-wrap gap-3">
+                <button class="spa-filter-btn active px-4 py-2 rounded-full text-sm" data-spa-filter="all">全部</button>
+                <button class="spa-filter-btn px-4 py-2 rounded-full text-sm" data-spa-filter="hangzhou">杭州</button>
+                <button class="spa-filter-btn px-4 py-2 rounded-full text-sm" data-spa-filter="shanghai">上海</button>
+                <button class="spa-filter-btn px-4 py-2 rounded-full text-sm" data-spa-filter="both">上海＆杭州</button>
+            </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 杭州足浴按摩推荐（新增）</h3>
+                <div class="panel p-6 spa-card" data-city="hangzhou">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 杭州足浴按摩推薦（新增）</h3>
                     <ul class="space-y-3 text-sm text-[#6d665f]">
-                        <li>• <strong>中经堂（湖滨店/城西银泰店）</strong>：专业中医经络推拿，舒缓疲劳、调理肩颈效果出众</li>
-                        <li>• <strong>皇庭记影院式足道</strong>：影院式大包间，配套免费简餐小吃，观影放松两不误</li>
-                        <li>• <strong>紫莲花足道（庆春路店）</strong>：传统中式手法娴熟，性价比高，日常放松首选</li>
-                        <li>• <strong>乐尚荟足道SPA</strong>：市中心高端环境，适合朋友、团体小聚，私密性佳</li>
-                        <li>• <strong>沈园堂</strong>：药浴熏蒸搭配艾灸，主打深度养生放松，适合长期伏案人群</li>
-                        <li>• <strong>臻本足道</strong>：口碑稳定，手法专业，价格适中，适合高频放松</li>
-                        <li>• <strong>暹罗·素可泰高端泰式按摩SPA会所</strong>：正宗泰式古法拉伸，环境雅致，体验感强</li>
-                        <li>• <strong>千江月影院式足道</strong>：影院式包间，提供免费简餐，城西银泰附近便捷</li>
-                        <li>• <strong>善若水足道</strong>：社区口碑店，手法温和，性价比高，适合周边居民</li>
-                        <li>• <strong>清沐轩影院式足道·SPA</strong>：新店开业福利多，影院式沉浸式体验，环境安静</li>
-                        <li>• <strong>沐菓子（滨江东和时代店）</strong>：1000㎡超大空间，免费小火锅、牛排等简餐，停车免费</li>
+                        <li>• <strong>中經堂（湖濱店/城西銀泰店）</strong>：專業中醫經絡推拿，舒緩疲勞、調理肩頸效果出眾</li>
+                        <li>• <strong>皇庭記影院式足道</strong>：影院式大包間，配套免費簡餐小吃，觀影放鬆兩不誤</li>
+                        <li>• <strong>紫蓮花足道（慶春路店）</strong>：傳統中式手法嫻熟，性價比高，日常放鬆首選</li>
+                        <li>• <strong>樂尚薈足道SPA</strong>：市中心高端環境，適合朋友、團體小聚，私密性佳</li>
+                        <li>• <strong>沈園堂</strong>：藥浴燻蒸搭配艾灸，主打深度養生放鬆，適合長期伏案人群</li>
+                        <li>• <strong>臻本足道</strong>：口碑穩定，手法專業，價格適中，適合高頻放鬆</li>
+                        <li>• <strong>暹羅·素可泰高端泰式按摩SPA會所</strong>：正宗泰式古法拉伸，環境雅緻，體驗感強</li>
+                        <li>• <strong>千江月影院式足道</strong>：影院式包間，提供免費簡餐，城西銀泰附近便捷</li>
+                        <li>• <strong>善若水足道</strong>：社區口碑店，手法溫和，性價比高，適合周邊居民</li>
+                        <li>• <strong>清沐軒影院式足道·SPA</strong>：新店開業福利多，影院式沉浸式體驗，環境安靜</li>
+                        <li>• <strong>沐菓子（濱江東和時代店）</strong>：1000㎡超大空間，免費小火鍋、牛排等簡餐，停車免費</li>
                     </ul>
                 </div>
 
-                <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 上海足浴按摩推荐（新增）</h3>
+                <div class="panel p-6 spa-card" data-city="shanghai">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 上海足浴按摩推薦（新增）</h3>
                     <ul class="space-y-3 text-sm text-[#6d665f]">
-                        <li>• <strong>大桶大足浴</strong>：连锁品牌口碑稳定，价格亲民，提供茶点水果，69-109元基础套餐热销</li>
-                        <li>• <strong>璞·澐间影院足道</strong>：高空景观视野佳，边按摩边看电影，适合夜景放松</li>
-                        <li>• <strong>兰·泰式古法按摩</strong>：正宗泰式拉伸放松，环境安静雅致，缓解肌肉紧张效果好</li>
-                        <li>• <strong>域SPA（新天地店）</strong>：轻奢简约风格，适合商务休闲放松，私密性与体验感俱佳</li>
-                        <li>• <strong>指沐足浴</strong>：营业至凌晨，深夜放松好去处，24小时服务便捷</li>
-                        <li>• <strong>莲SPA足道养生馆（中山公园店）</strong>：高口碑连锁，环境舒适，服务专业</li>
-                        <li>• <strong>日本天然药石浴·逸生堂·按摩</strong>：药石浴特色，舒缓身心，古北商圈高端体验</li>
-                        <li>• <strong>康道按摩</strong>：专业理疗，针对肩颈腰劳损，适合上班族调理</li>
-                        <li>• <strong>国医整脊馆（武夷路店）</strong>：中医整脊专业，缓解脊柱问题，长宁区口碑店</li>
-                        <li>• <strong>Together Massage（天山店）</strong>：轻养生按摩，环境温馨，适合日常放松</li>
+                        <li>• <strong>大桶大足浴</strong>：連鎖品牌口碑穩定，價格親民，提供茶點水果，69-109元基礎套餐熱銷</li>
+                        <li>• <strong>璞·澐間影院足道</strong>：高空景觀視野佳，邊按摩邊看電影，適合夜景放鬆</li>
+                        <li>• <strong>蘭·泰式古法按摩</strong>：正宗泰式拉伸放鬆，環境安靜雅緻，緩解肌肉緊張效果好</li>
+                        <li>• <strong>域SPA（新天地店）</strong>：輕奢簡約風格，適合商務休閒放鬆，私密性與體驗感俱佳</li>
+                        <li>• <strong>指沐足浴</strong>：營業至凌晨，深夜放鬆好去處，24小時服務便捷</li>
+                        <li>• <strong>蓮SPA足道養生館（中山公園店）</strong>：高口碑連鎖，環境舒適，服務專業</li>
+                        <li>• <strong>日本天然藥石浴·逸生堂·按摩</strong>：藥石浴特色，舒緩身心，古北商圈高端體驗</li>
+                        <li>• <strong>康道按摩</strong>：專業理療，針對肩頸腰勞損，適合上班族調理</li>
+                        <li>• <strong>國醫整脊館（武夷路店）</strong>：中醫整脊專業，緩解脊柱問題，長寧區口碑店</li>
+                        <li>• <strong>Together Massage（天山店）</strong>：輕養生按摩，環境溫馨，適合日常放鬆</li>
                     </ul>
                 </div>
 
-                <div class="panel p-6 md:col-span-2">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🛁 杭州/上海高端洗浴/汤泉中心（新增）</h3>
+                <div class="panel p-6 md:col-span-2 spa-card" data-city="both">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🛁 杭州/上海高端洗浴/湯泉中心（新增）</h3>
                     <div class="grid md:grid-cols-2 gap-4 text-sm">
                         <div>
-                            <p class="font-bold">曲水兰亭（杭州钱江世纪公园店/上海虹桥店）</p>
-                            <p class="text-[#6d665f]">顶奢汤泉，8000+㎡空间，海鲜自助（帝王蟹/鳌虾），法尔曼/戴森配置，24小时营业</p>
+                            <p class="font-bold">曲水蘭亭（杭州錢江世紀公園店/上海虹橋店）</p>
+                            <p class="text-[#6d665f]">頂奢湯泉，8000+㎡空間，海鮮自助（帝王蟹/鰲蝦），法爾曼/戴森配置，24小時營業</p>
                         </div>
                         <div>
-                            <p class="font-bold">水裹·汤泉生活（杭州钱江世纪店/上海虹桥/五角场店）</p>
-                            <p class="text-[#6d665f]">网红轻奢汤泉，车厘子/榴莲/椰皇自由，24小时开放，可过夜，水果饮品畅吃</p>
+                            <p class="font-bold">水裹·湯泉生活（杭州錢江世紀店/上海虹橋/五角場店）</p>
+                            <p class="text-[#6d665f]">網紅輕奢湯泉，車厘子/榴槤/椰皇自由，24小時開放，可過夜，水果飲品暢吃</p>
                         </div>
                         <div>
-                            <p class="font-bold">汤连得（上海长寿路总店/杭州多家分店）</p>
-                            <p class="text-[#6d665f]">韩式汗蒸洗浴标杆，价格实惠，家庭友好，韩式料理与汗蒸设施齐全</p>
+                            <p class="font-bold">湯連得（上海長壽路總店/杭州多家分店）</p>
+                            <p class="text-[#6d665f]">韓式汗蒸洗浴標竿，價格實惠，家庭友好，韓式料理與汗蒸設施齊全</p>
                         </div>
                         <div>
-                            <p class="font-bold">漾·SPACE（上海陆家嘴店/杭州多家分店）</p>
-                            <p class="text-[#6d665f]">艺术汤泉，1.2亿投资，智能灯光+PS5+全息投影，年轻人打卡首选</p>
+                            <p class="font-bold">漾·SPACE（上海陸家嘴店/杭州多家分店）</p>
+                            <p class="text-[#6d665f]">藝術湯泉，1.2億投資，智慧燈光+PS5+全息投影，年輕人打卡首選</p>
                         </div>
                         <div>
                             <p class="font-bold">沐屿新集（杭州店/上海店）</p>
-                            <p class="text-[#6d665f]">高端轻奢汤泉，海鲜自助（小青龙/三文鱼/燕窝桃胶），大牌洗护，10000+㎡空间</p>
+                            <p class="text-[#6d665f]">高端輕奢湯泉，海鮮自助（小青龍/三文魚/燕窩桃膠），大牌洗護，10000+㎡空間</p>
                         </div>
                         <div>
-                            <p class="font-bold">海纳百川（杭州西湖区店）</p>
-                            <p class="text-[#6d665f]">智能型温泉生活馆，集沐足、SPA、汗蒸、茶艺、餐饮于一体，一站式放松</p>
+                            <p class="font-bold">海納百川（杭州西湖區店）</p>
+                            <p class="text-[#6d665f]">智慧型溫泉生活館，集沐足、SPA、汗蒸、茶藝、餐飲於一體，一站式放鬆</p>
                         </div>
                         <div>
-                            <p class="font-bold">胤隆汇（杭州上城区店）</p>
-                            <p class="text-[#6d665f]">老牌洗浴中心，24小时自助餐，免费休闲区（台球/电竞/阅读室），适合家庭聚会</p>
+                            <p class="font-bold">胤隆匯（杭州上城區店）</p>
+                            <p class="text-[#6d665f]">老牌洗浴中心，24小時自助餐，免費休閒區（台球/電競/閱讀室），適合家庭聚會</p>
                         </div>
                         <div>
-                            <p class="font-bold">海茵汇温泉（杭州滨江店）</p>
-                            <p class="text-[#6d665f]">20000㎡超大规模，温泉+汗蒸+足浴+SPA，三文鱼/小龙虾畅吃，性价比高</p>
+                            <p class="font-bold">海茵匯溫泉（杭州濱江店）</p>
+                            <p class="text-[#6d665f]">20000㎡超大規模，溫泉+汗蒸+足浴+SPA，三文魚/小龍蝦暢吃，性價比高</p>
                         </div>
                         <div>
                             <p class="font-bold">涟泉大江户（上海莘庄总店）</p>
-                            <p class="text-[#6d665f]">沉浸式日式温泉，和服拍照、星空木屋、江户街景，适合亲子与打卡</p>
+                            <p class="text-[#6d665f]">沉浸式日式溫泉，和服拍照、星空木屋、江戶街景，適合親子與打卡</p>
                         </div>
                         <div>
                             <p class="font-bold">淇奥沐舍（上海虹口店）</p>
-                            <p class="text-[#6d665f]">东方美学设计，PS5+电竞房+棋牌室，网红沐足+港式采耳套餐，免费停车</p>
+                            <p class="text-[#6d665f]">東方美學設計，PS5+電競房+棋牌室，網紅沐足+港式採耳套餐，免費停車</p>
                         </div>
                         <div>
-                            <p class="font-bold">汤源温泉（杭州拱墅区店）</p>
-                            <p class="text-[#6d665f]">20000㎡艺术空间，智能泡池+露天泳池夜景，非遗搓澡+烧鸟派对，仪式感拉满</p>
+                            <p class="font-bold">湯源溫泉（杭州拱墅區店）</p>
+                            <p class="text-[#6d665f]">20000㎡藝術空間，智慧泡池+露天泳池夜景，非遺搓澡+燒鳥派對，儀式感拉滿</p>
                         </div>
                         <div>
                             <p class="font-bold">纽斯洗浴SPA（杭州未来科技城旗舰店）</p>
-                            <p class="text-[#6d665f]">12000㎡日式温泉馆，24小时营业，日式泡池与汗蒸设施，适合周边通勤族</p>
+                            <p class="text-[#6d665f]">12000㎡日式溫泉館，24小時營業，日式泡池與汗蒸設施，適合周邊通勤族</p>
                         </div>
                     </div>
                 </div>
@@ -549,7 +613,7 @@
                 <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🎤 上海 頂級商務KTV（商K）</h3>
                 <div class="grid md:grid-cols-2 gap-4 text-sm">
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">星辉国际（靜安區）</p><p class="text-[#6d665f]">上海商K天花板，政企接待首選，服務極致私密</p></div>
-                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">金玉兰会客厅（黃浦區）</p><p class="text-[#6d665f]">外灘一線江景，億元級硬體，頂奢接待場所</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">金玉蘭會客廳（黃浦區）</p><p class="text-[#6d665f]">外灘一線江景，億元級硬體，頂奢接待場所</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">外滩万利（黃浦區）</p><p class="text-[#6d665f]">海派地標，外事接待經驗豐富，包廂氣派</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">ONEONLY（黃浦區）</p><p class="text-[#6d665f]">演員顏值第一梯隊，商務風格，談生意首選</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">亞龍國際 KTV（靜安）</p><p class="text-[#6d665f]">頂級商務包廂，環境奢華，私密性強</p></div>
@@ -568,7 +632,7 @@
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">ME PARTY KTV（拱墅）</p><p class="text-[#6d665f]">68間豪華包廂，管家式服務，商務休閒首選</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">罗曼达KTV（拱墅）</p><p class="text-[#6d665f]">歐式奢華，西湖文化廣場，高端商務場</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">PARTY WIN（錢江新城）</p><p class="text-[#6d665f]">高德置地，落地窗夜景，DJ打碟，派對首選</p></div>
-                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">云鼎国际会所（西湖）</p><p class="text-[#6d665f]">保俶路景觀位，獨立休息區，適合高端宴請</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">雲鼎國際會所（西湖）</p><p class="text-[#6d665f]">保俶路景觀位，獨立休息區，適合高端宴請</p></div>
                     <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">凱瑞KTV（上城九堡）</p><p class="text-[#6d665f]">性價比高，做生意老闆就近接待首選</p></div>
                 </div>
             </div>
@@ -625,27 +689,64 @@
         </section>
 
         <section id="transport" class="tab-content space-y-6">
+            <div class="panel p-5 md:p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-3">交通速查</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="transport-chip">✈ 台北→上海：約 2 小時</span>
+                    <span class="transport-chip">🚄 上海→杭州：約 1 小時</span>
+                    <span class="transport-chip">🚗 杭州→烏鎮：約 1 小時</span>
+                    <span class="transport-chip">🚗 烏鎮→上海：約 1 小時 40 分</span>
+                </div>
+            </div>
+
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">住宿資訊</h3>
-                    <div class="space-y-4 text-sm text-[#6d665f]">
-                        <div class="pb-4 border-b border-[#e7dac8]">
-                            <p class="font-semibold text-[#2f2b27]">杭州 (6/10-12)</p>
-                            <p>杭州西湖嘉宏酒店河坊街店</p>
-                        </div>
-                        <div>
-                            <p class="font-semibold text-[#2f2b27]">上海 (6/12-15)</p>
-                            <p>Tonight Homestay（靜安區）</p>
-                        </div>
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🏨 杭州住宿（6/10-6/12）</h3>
+                    <img
+                        class="hotel-photo"
+                        src="https://ak-d.tripcdn.com/images/1mc2u12000g0tfj6v8BE9_W_1280_853_R5.webp?proc=watermark/image_trip1,l_ne,x_16,y_16,w_67,h_16;digimark/t_image,logo_tripbinary;ignoredefaultwm,1A8F"
+                        alt="嘉宏飯店（杭州西湖河坊街店）"
+                        loading="lazy"
+                    >
+                    <div class="space-y-2 text-sm text-[#6d665f]">
+                        <p class="font-semibold text-[#2f2b27]">嘉宏飯店（杭州西湖河坊街店）</p>
+                        <p>建議重點：西湖景區、河坊街商圈移動方便，適合 Day1-2 行程。</p>
+                        <p>入住提醒：可先準備台胞證資料，提早辦理入住更順。</p>
                     </div>
                 </div>
+
                 <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">交通筆記</h3>
-                    <ul class="space-y-2 text-sm text-[#6d665f]">
-                        <li>上海 ⇄ 杭州：高鐵約 1 小時，建議提前 15 天訂票。</li>
-                        <li>烏鎮段：6 人包車直達最輕鬆。</li>
-                        <li>上海市區：地鐵快但擁擠，建議分車搭滴滴。</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🏨 上海住宿（6/12-6/15）</h3>
+                    <img
+                        class="hotel-photo"
+                        src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/770266416.jpg?k=2e3d678489407acfcf59bf50147f6ca8fda49793969666c2d0965102852b9879&o="
+                        alt="Tonight Homestay（上海）"
+                        loading="lazy"
+                    >
+                    <div class="space-y-2 text-sm text-[#6d665f]">
+                        <p class="font-semibold text-[#2f2b27]">Tonight Homestay（靜安區）</p>
+                        <p>建議重點：夜生活與購物行程集中，回住宿動線短。</p>
+                        <p>入住提醒：可先確認凌晨回程交通（滴滴或代駕）避免臨時等車。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🚌 交通筆記（實用版）</h3>
+                <ul class="space-y-2 text-sm text-[#6d665f]">
+                    <li>上海 ⇄ 杭州：高鐵約 1 小時，建議提前 15 天訂票。</li>
+                    <li>烏鎮段：6 人包車直達最輕鬆，晚上回上海不換車更省力。</li>
+                    <li>上海市區：地鐵快但擁擠，3 人一車叫車效率更高。</li>
+                    <li>返程日：預留至少 2.5-3 小時前往機場，避免尖峰塞車。</li>
+                </ul>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">✅ 行前小提醒</h3>
+                <div class="grid md:grid-cols-3 gap-3 text-sm text-[#6d665f]">
+                    <div class="border border-[#e9ddcc] rounded-lg p-3 bg-[#fffdfa]">證件：台胞證、護照、保險文件</div>
+                    <div class="border border-[#e9ddcc] rounded-lg p-3 bg-[#fffdfa]">交通：高鐵截圖、包車聯絡方式</div>
+                    <div class="border border-[#e9ddcc] rounded-lg p-3 bg-[#fffdfa]">住宿：入住資訊、緊急聯絡電話</div>
                 </div>
             </div>
         </section>
@@ -682,6 +783,7 @@
         ];
         let foodData = [...defaultFoodData];
         let selectedFoodFilter = "all";
+        let selectedSpaFilter = "all";
 
         const validTabs = new Set(["overview", "itinerary", "food", "spa", "night", "transport"]);
         const NIGHT_TAB_PIN = "777";
@@ -724,6 +826,15 @@
                     </div>
                 </article>
             `).join("");
+        }
+
+        function renderSpa(city = "all") {
+            selectedSpaFilter = city;
+            document.querySelectorAll(".spa-card").forEach(card => {
+                const cardCity = card.dataset.city;
+                const visible = city === "all" || city === cardCity;
+                card.style.display = visible ? "" : "none";
+            });
         }
 
         function loadFoods() {
@@ -839,6 +950,14 @@
                 });
             });
 
+            document.querySelectorAll(".spa-filter-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".spa-filter-btn").forEach(el => el.classList.remove("active"));
+                    btn.classList.add("active");
+                    renderSpa(btn.dataset.spaFilter);
+                });
+            });
+
             document.getElementById("food-add-btn").addEventListener("click", addFoodItem);
             ["food-name-input", "food-desc-input", "food-map-input"].forEach(id => {
                 document.getElementById(id).addEventListener("keydown", (event) => {
@@ -880,6 +999,7 @@
             switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
             loadFoods();
             renderFood();
+            renderSpa(selectedSpaFilter);
             loadTodos();
         });
     </script>
