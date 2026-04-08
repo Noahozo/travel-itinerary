@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 黑柚柏冠・霖云同行 上海杭州烏镇奢旅 - 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6f0e6;
+            --surface: #fffdf9;
+            --surface-soft: #fdf7ef;
+            --ink: #2f2b27;
+            --muted: #6d665f;
+            --primary: #1f4f46;
+            --primary-soft: #d9ebe7;
+            --accent: #b5874f;
+            --line: #e7dac8;
+            --shadow: 0 16px 36px rgba(47, 43, 39, 0.08);
+        }
+
+        body {
+            font-family: "Noto Sans TC", sans-serif;
+            color: var(--ink);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 0% 0%, #efe3d2 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, #e8ddd0 0%, transparent 35%),
+                var(--bg);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Noto Serif TC", serif;
+            letter-spacing: 0.02em;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+        }
+
+        .nav-link {
+            color: var(--muted);
+            font-weight: 500;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover { color: var(--primary); }
+        .nav-active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .chip {
+            background: rgba(255, 253, 249, 0.82);
+            border: 1px solid rgba(231, 218, 200, 0.8);
+            backdrop-filter: blur(3px);
+        }
+
+        .timeline-line::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: var(--line);
+        }
+
+        .marker {
+            width: 14px;
+            height: 14px;
+            border-radius: 999px;
+            position: absolute;
+            left: -30px;
+            top: 6px;
+            border: 3px solid var(--surface);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .food-btn {
+            border: 1px solid var(--line);
+            color: var(--muted);
+            background: var(--surface);
+            transition: all 0.2s ease;
+        }
+
+        .food-btn.active {
+            color: #fff;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .food-btn:hover { color: var(--primary); }
+        .food-btn.active:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 w-full z-50 border-b border-[#e7dac8] bg-[#fffaf2]/90 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <span class="text-lg md:text-xl font-bold text-[#1f4f46]">Voyage Atelier</span>
+                <div class="hidden md:flex gap-6 text-sm">
+                    <button data-tab="overview" class="nav-link nav-active">行程總覽</button>
+                    <button data-tab="itinerary" class="nav-link">每日行程</button>
+                    <button data-tab="food" class="nav-link">美食地圖</button>
+                    <button data-tab="spa" class="nav-link">足浴洗浴</button>
+                    <button data-tab="night" class="nav-link">夜生活娛樂</button>
+                    <button data-tab="transport" class="nav-link">交通住宿</button>
+                </div>
+            </div>
+            <div class="md:hidden pb-3 -mx-1 px-1 overflow-x-auto whitespace-nowrap">
+                <button data-tab="overview" class="nav-link nav-active inline-block mr-4 text-sm">行程總覽</button>
+                <button data-tab="itinerary" class="nav-link inline-block mr-4 text-sm">每日行程</button>
+                <button data-tab="food" class="nav-link inline-block mr-4 text-sm">美食地圖</button>
+                <button data-tab="spa" class="nav-link inline-block mr-4 text-sm">足浴洗浴</button>
+                <button data-tab="night" class="nav-link inline-block mr-4 text-sm">夜生活娛樂</button>
+                <button data-tab="transport" class="nav-link inline-block mr-1 text-sm">交通住宿</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 md:pt-32 pb-16 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="panel p-8 md:p-12 text-center bg-gradient-to-br from-[#fff8ee] to-[#f4ede2]">
+                <p class="tracking-[0.2em] text-xs text-[#8b7e72] mb-4">SUMMER 2026 PREMIUM ITINERARY</p>
+                <h1 class="text-3xl md:text-5xl font-bold mb-3 text-[#1f4f46]">上海・杭州・烏鎮</h1>
+                <p class="text-[#6d665f] text-lg">2026/06/10 – 06/15 | 6人精奢包車遊</p>
+                <div class="mt-8 flex justify-center gap-3 flex-wrap text-sm">
+                    <span class="chip px-4 py-2 rounded-full">#網紅打卡</span>
+                    <span class="chip px-4 py-2 rounded-full">#足浴放鬆</span>
+                    <span class="chip px-4 py-2 rounded-full">#宮廷饗宴</span>
+                    <span class="chip px-4 py-2 rounded-full">#夜生活</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 pb-14">
+        <section id="overview" class="tab-content active space-y-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="panel p-7 md:p-8">
+                    <h2 class="section-title text-2xl font-bold mb-6">行程路線分析</h2>
+                    <canvas id="travelChart" height="200"></canvas>
+                </div>
+                <div class="panel p-7 md:p-8 space-y-4">
+                    <h3 class="text-xl font-bold text-[#1f4f46]">為什麼這樣安排？</h3>
+                    <p class="text-[#6d665f] leading-7">
+                        「入境杭州、出境上海」，為六人同行規劃最順暢的路線。
+                        從杭州山水到烏鎮水鄉，再到上海繁華夜景，
+                        一路由靜至動、由慢至奢，節奏恰到好處。
+                        搭配足浴湯泉紓壓，讓旅途不只看遍風景，更能舒心相伴。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="rounded-xl p-4 bg-[#f3ebe0] border border-[#e7dac8]">
+                            <p class="text-[#8b6b3e] font-semibold text-sm">總里程</p>
+                            <p class="text-2xl font-bold text-[#1f4f46]">約 380km</p>
+                        </div>
+                        <div class="rounded-xl p-4 bg-[#eaf3ef] border border-[#cfe0db]">
+                            <p class="text-[#1f4f46] font-semibold text-sm">放鬆行程</p>
+                            <p class="text-2xl font-bold text-[#1f4f46]">3 場 SPA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="itinerary" class="tab-content space-y-6">
+            <div class="panel p-6 md:p-7">
+                <h2 class="section-title text-2xl font-bold mb-5">Day 1 | 6/10 啟程：初見西湖</h2>
+                <div class="relative pl-8 timeline-line space-y-6">
+                    <div class="relative"><span class="marker bg-[#1f4f46]"></span><p class="font-semibold">09:55 抵達桃園機場 → 前往上海</p><p class="text-sm text-[#6d665f]">搭乘長榮航空 BR712 (2hr)</p></div>
+                    <div class="relative"><span class="marker bg-[#1f4f46]"></span><p class="font-semibold">12:05 抵達上海浦東機場 → 前往杭州</p><p class="text-sm text-[#6d665f]">高鐵移動 (1hr)</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">16:00 杭州西湖湖濱散步</p><p class="text-sm text-[#6d665f]">建議停留：2小時</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">20:00 杭州在地足浴體驗</p><p class="text-sm text-[#6d665f]">推薦：中經堂 / 皇庭記 / 紫蓮花足道</p></div>
+                </div>
+            </div>
+            <div class="panel p-6 md:p-7">
+                <h2 class="section-title text-2xl font-bold mb-5">Day 2 | 6/11 杭州：宮廷盛宴與靈隱</h2>
+                <div class="relative pl-8 timeline-line space-y-6">
+                    <div class="relative"><span class="marker bg-[#1f4f46]"></span><p class="font-semibold">09:00 靈隱寺 / 飛來峰</p><p class="text-sm text-[#6d665f]">建議停留：3小時</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">12:30 重點：宮廷宴 午餐</p><p class="text-sm text-[#6d665f]">杭州特色奢華饗宴</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">15:30 小河直街歷史街區</p><p class="text-sm text-[#6d665f]">文青古街散策</p></div>
+                </div>
+            </div>
+            <div class="panel p-6 md:p-7">
+                <h2 class="section-title text-2xl font-bold mb-5">Day 3 | 6/12 轉場：烏鎮夢迴水鄉</h2>
+                <div class="relative pl-8 timeline-line space-y-6">
+                    <div class="relative"><span class="marker bg-[#1f4f46]"></span><p class="font-semibold">10:00 包車前往烏鎮 (西柵)</p><p class="text-sm text-[#6d665f]">車程約 1hr</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">14:00 烏鎮西柵景區悠遊</p><p class="text-sm text-[#6d665f]">體驗搖櫓船、染坊打卡</p></div>
+                    <div class="relative"><span class="marker bg-[#b5874f]"></span><p class="font-semibold">20:00 夜遊後包車前往上海</p><p class="text-sm text-[#6d665f]">抵達上海靜安區住宿</p></div>
+                </div>
+            </div>
+            <div class="panel p-6 md:p-7 bg-[#fdf6eb]">
+                <p class="font-semibold text-[#1f4f46]">Day 4-6 上海亮點</p>
+                <ul class="list-disc ml-5 mt-2 space-y-1 text-sm text-[#6d665f]">
+                    <li>Day 4：豫園、田子坊、外灘夜景 + 露台酒吧 + 足浴</li>
+                    <li>Day 5：東方明珠、武康路、南京西路購物 + 湯泉/夜店</li>
+                    <li>Day 6：早午餐後前往機場返台</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="food" class="tab-content space-y-8">
+            <div class="flex flex-wrap gap-3 mb-4">
+                <button class="food-btn active px-5 py-2 rounded-full text-sm" data-food="all">全部</button>
+                <button class="food-btn px-5 py-2 rounded-full text-sm" data-food="hangzhou">杭州菜</button>
+                <button class="food-btn px-5 py-2 rounded-full text-sm" data-food="shanghai">上海菜</button>
+                <button class="food-btn px-5 py-2 rounded-full text-sm" data-food="snack">特色小吃</button>
+            </div>
+            <div id="foodGrid" class="grid md:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="spa" class="tab-content space-y-8">
+            <h2 class="section-title text-2xl font-bold">足浴 & 洗浴中心推薦</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="panel p-6">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 杭州足浴推薦</h3>
+                    <ul class="space-y-3 text-sm text-[#6d665f]">
+                        <li>• <strong>中經堂（湖濱店）</strong>：中醫經絡推拿，解疲勞首選</li>
+                        <li>• <strong>皇庭記影院式足道</strong>：投影大包廂，附免費餐點</li>
+                        <li>• <strong>紫蓮花足道（慶春路）</strong>：中式手法穩定，CP值高</li>
+                        <li>• <strong>樂尚薈足道SPA</strong>：市中心高端，適合團體</li>
+                        <li>• <strong>沈園堂</strong>：藥浴+艾灸，深度養生放鬆</li>
+                    </ul>
+                </div>
+
+                <div class="panel p-6">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 上海足浴推薦</h3>
+                    <ul class="space-y-3 text-sm text-[#6d665f]">
+                        <li>• <strong>大桶大足浴</strong>：全網連鎖，價格親民，附茶點水果</li>
+                        <li>• <strong>璞·澐間影院足道</strong>：高空景觀，邊按摩邊看電影</li>
+                        <li>• <strong>蘭·泰式古法按摩</strong>：泰式拉伸，環境安靜舒適</li>
+                        <li>• <strong>域SPA（新天地）</strong>：輕奢風格，適合商務放鬆</li>
+                        <li>• <strong>指沐足浴</strong>：營業至凌晨，夜貓首選</li>
+                    </ul>
+                </div>
+
+                <div class="panel p-6 md:col-span-2">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🛁 上海頂級洗浴/湯泉中心</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="font-bold">曲水蘭亭（虹橋店）</p>
+                            <p class="text-[#6d665f]">頂奢湯泉，海鮮自助，環境極佳</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">水裹·湯泉生活</p>
+                            <p class="text-[#6d665f]">網紅湯泉，車厘子/榴蓮自由，可過夜</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">湯連得（長壽路）</p>
+                            <p class="text-[#6d665f]">韓式汗蒸，價格實惠，家庭友好</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">漾·SPACE（陸家嘴）</p>
+                            <p class="text-[#6d665f]">藝術湯泉，PS5+全息投影，年輕人愛去</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="night" class="tab-content space-y-8">
+            <h2 class="section-title text-2xl font-bold">夜生活 · 娛樂 & 精選景點</h2>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🎤 上海 頂級商務KTV（商K）</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">星辉国际（靜安區）</p><p class="text-[#6d665f]">上海商K天花板，政企接待首選，服務極致私密</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">金玉兰会客厅（黃浦區）</p><p class="text-[#6d665f]">外灘一線江景，億元級硬體，頂奢接待場所</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">外滩万利（黃浦區）</p><p class="text-[#6d665f]">海派地標，外事接待經驗豐富，包廂氣派</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">ONEONLY（黃浦區）</p><p class="text-[#6d665f]">演員顏值第一梯隊，商務風格，談生意首選</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">亞龍國際 KTV（靜安）</p><p class="text-[#6d665f]">頂級商務包廂，環境奢華，私密性強</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">1989KTV（閔行）</p><p class="text-[#6d665f]">虹橋附近，新裝修，高端音響，商務聚會適合</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">新濠國際（普陀）</p><p class="text-[#6d665f]">長壽路老牌場，消費選擇多，豐儉由人</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">V·SHOW / 凡花 KTV</p><p class="text-[#6d665f]">黃浦區頂流，時尚設計，年輕商務族群最愛</p></div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🎤 杭州 頂級商務KTV（商K）</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">天际线SKY LINE（上城）</p><p class="text-[#6d665f]">杭州最高端，有泳池包廂，頂奢接待專用</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">IN11高端KTV（上城）</p><p class="text-[#6d665f]">連續三年榜首，音響頂尖，商務接待首選</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">曼哈顿（上城）</p><p class="text-[#6d665f]">168間超大包廂，演員資源豐富，常年爆滿</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">ME PARTY KTV（拱墅）</p><p class="text-[#6d665f]">68間豪華包廂，管家式服務，商務休閒首選</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">罗曼达KTV（拱墅）</p><p class="text-[#6d665f]">歐式奢華，西湖文化廣場，高端商務場</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">PARTY WIN（錢江新城）</p><p class="text-[#6d665f]">高德置地，落地窗夜景，DJ打碟，派對首選</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">云鼎国际会所（西湖）</p><p class="text-[#6d665f]">保俶路景觀位，獨立休息區，適合高端宴請</p></div>
+                    <div class="border-l-4 border-[#d7c2a0] pl-3 py-1"><p class="font-bold">凱瑞KTV（上城九堡）</p><p class="text-[#6d665f]">性價比高，做生意老闆就近接待首選</p></div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">💆 上海 足浴 & SPA 推薦</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">大桶大足道（連鎖）</p><p class="text-[#6d665f]">影院式足道，免費餐點，性價比之王</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">璞·澐間影院足道（陸家嘴）</p><p class="text-[#6d665f]">高空景觀，頂級服務，商務接待有面子</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">域SPA（新天地）</p><p class="text-[#6d665f]">輕奢風格，中醫推拿，商務放鬆首選</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">蘭·泰式古法按摩（新天地）</p><p class="text-[#6d665f]">泰式拉伸，環境安靜，紓壓一流</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">富僑養生（連鎖）</p><p class="text-[#6d665f]">全國連鎖，中醫足療，品質穩定</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">足蓮得•足道spa（瑞虹）</p><p class="text-[#6d665f]">歐式奢華風，網紅打卡，適合閨蜜小聚</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">越江南湯泉足道（虹口）</p><p class="text-[#6d665f]">3000㎡豪華，免費簡餐，湯泉+足浴一站式</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">指沐足浴（連鎖）</p><p class="text-[#6d665f]">營業至凌晨，夜貓首選，服務細緻</p></div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">💆 杭州 足浴 & SPA 推薦</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">沈園堂（連鎖）</p><p class="text-[#6d665f]">老牌國醫館，非遺鄭氏足療，中藥熏蒸</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">君逸天下（拱墅）</p><p class="text-[#6d665f]">商務風首選，獨立影院包廂+茶室，適合談事</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">沐·北海（拱墅）</p><p class="text-[#6d665f]">泰式手法，星空頂包廂，免費海鮮粥</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">水尚瀾亭（拱墅）</p><p class="text-[#6d665f]">江南庭院風，玫瑰牛奶浴足，可免費體驗漢服</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">今萃足道（拱墅）</p><p class="text-[#6d665f]">中醫理療，艾草熏蒸，祛濕一流</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">足本紀（余杭）</p><p class="text-[#6d665f]">黑金風高級感，影院體驗，免費自助餐食</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">雲上漣湯泉足道（西湖）</p><p class="text-[#6d665f]">宋韻風格，湯泉+足道+簡餐一站式</p></div>
+                    <div class="border-l-4 border-[#c5d9d5] pl-3 py-1"><p class="font-bold">海納百川（學院路）</p><p class="text-[#6d665f]">高端體驗，大牌護膚用品，精緻餐食</p></div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🥂 上海熱門夜店 / 酒吧</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#e1c8dd] pl-3 py-1"><p class="font-bold">LINX / M2</p><p class="text-[#6d665f]">淮海路/靜安頂級夜店，國際明星常去</p></div>
+                    <div class="border-l-4 border-[#e1c8dd] pl-3 py-1"><p class="font-bold">Fusion / Myst</p><p class="text-[#6d665f]">音樂氛圍好，年輕人、老外聚集地</p></div>
+                    <div class="border-l-4 border-[#e1c8dd] pl-3 py-1"><p class="font-bold">外灘露台酒吧</p><p class="text-[#6d665f]">Flair、The Rooftop，無敵夜景第一排</p></div>
+                    <div class="border-l-4 border-[#e1c8dd] pl-3 py-1"><p class="font-bold">D-ONE / 4PILLARS</p><p class="text-[#6d665f]">靜安/黃浦高端酒吧，商務小酌首選</p></div>
+                </div>
+            </div>
+
+            <div class="panel p-6">
+                <h3 class="text-xl font-bold text-[#1f4f46] mb-4">📍 滬杭 精選景點（補充）</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">上海 · 外灘 & 南京路</p><p class="text-[#6d665f]">魔都地標，夜景必逛</p></div>
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">上海 · 武康路 & 法租界</p><p class="text-[#6d665f]">網紅打卡、老洋房咖啡街</p></div>
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">杭州 · 西湖十景 & 雷峰塔</p><p class="text-[#6d665f]">經典不敗，拍照極佳</p></div>
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">杭州 · 龍井村品茶</p><p class="text-[#6d665f]">採茶、品茶、體驗茶鄉文化</p></div>
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">烏鎮 · 東柵 + 西柵夜景</p><p class="text-[#6d665f]">水鄉風光，搖櫓船必坐</p></div>
+                    <div class="border-l-4 border-[#b8d5c9] pl-3 py-1"><p class="font-bold">上海 · 豫園 & 城隍廟</p><p class="text-[#6d665f]">古風建築+特色小吃一條街</p></div>
+云                </div>
+            </div>
+        </section>
+
+        <section id="transport" class="tab-content space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="panel p-6">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">住宿資訊</h3>
+                    <div class="space-y-4 text-sm text-[#6d665f]">
+                        <div class="pb-4 border-b border-[#e7dac8]">
+                            <p class="font-semibold text-[#2f2b27]">杭州 (6/10-12)</p>
+                            <p>杭州西湖嘉宏酒店河坊街店</p>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-[#2f2b27]">上海 (6/12-15)</p>
+                            <p>Tonight Homestay（靜安區）</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel p-6">
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">交通筆記</h3>
+                    <ul class="space-y-2 text-sm text-[#6d665f]">
+                        <li>上海 ⇄ 杭州：高鐵約 1 小時，建議提前 15 天訂票。</li>
+                        <li>烏鎮段：6 人包車直達最輕鬆。</li>
+                        <li>上海市區：地鐵快但擁擠，建議分車搭滴滴。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-16 py-10 text-center text-sm text-[#7a726a] border-t border-[#e7dac8]">
+        <p>© 2026 滬杭烏專屬行程規劃 · 享受每一段旅程</p>
+    </footer>
+
+    <script>
+        const foodData = [
+            { name: "樓外樓（西湖店）", cat: "hangzhou", desc: "東坡肉、西湖醋魚、龍井蝦仁", map: "Lou+Wai+Lou+Hangzhou" },
+            { name: "知味觀", cat: "hangzhou", desc: "叫花雞、宋嫂魚羹、杭幫經典", map: "知味觀+杭州" },
+            { name: "奎元館", cat: "hangzhou", desc: "片兒川、蝦爆鱔麵", map: "奎元館+杭州" },
+            { name: "新白鹿餐廳", cat: "hangzhou", desc: "高 CP 值杭幫菜", map: "新白鹿+杭州" },
+            { name: "上海老飯店", cat: "shanghai", desc: "八寶鴨、響油鱔糊、本幫菜鼻祖", map: "上海老飯店+南京東路" },
+            { name: "德興館", cat: "shanghai", desc: "草頭圈子、濃油赤醬", map: "德興館+上海" },
+            { name: "南翔小籠包", cat: "snack", desc: "豫園經典小籠", map: "Nanxiang+Xiaolongbao+Shanghai" },
+            { name: "小楊生煎", cat: "snack", desc: "上海必吃生煎", map: "小楊生煎+上海" },
+            { name: "鮮得來排骨年糕", cat: "snack", desc: "排骨+年糕+甜辣醬", map: "鮮得來+排骨年糕+上海" },
+            { name: "佳家湯包", cat: "snack", desc: "皮薄湯多蟹粉湯包", map: "Jia+Jia+Tang+Bao+Shanghai" },
+            { name: "阿大蔥油餅", cat: "snack", desc: "老上海街頭靈魂", map: "阿大蔥油餅+上海" }
+        ];
+
+        function switchTab(tabId) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("nav-active"));
+            document.getElementById(tabId).classList.add("active");
+            document.querySelectorAll(`.nav-link[data-tab="${tabId}"]`).forEach(el => el.classList.add("nav-active"));
+        }
+
+        function renderFood(filter = "all") {
+            const grid = document.getElementById("foodGrid");
+            const filtered = filter === "all" ? foodData : foodData.filter(f => f.cat === filter);
+            grid.innerHTML = filtered.map(item => `
+                <article class="panel p-5">
+                    <p class="text-xs tracking-wide text-[#8b7e72] mb-2">${item.cat === "hangzhou" ? "HANGZHOU" : item.cat === "shanghai" ? "SHANGHAI" : "LOCAL SNACK"}</p>
+                    <h4 class="text-lg font-bold mb-2 text-[#1f4f46]">${item.name}</h4>
+                    <p class="text-sm text-[#6d665f] mb-4">${item.desc}</p>
+                    <a href="https://www.google.com/maps/search/${item.map}" target="_blank" class="inline-block text-xs px-3 py-1 rounded-full border border-[#d9ccb7] text-[#6d665f] hover:bg-[#f3ebe0]">查看地圖</a>
+                </article>
+            `).join("");
+        }
+
+        function bindEvents() {
+            document.querySelectorAll(".nav-link").forEach(btn => {
+                btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+            });
+
+            document.querySelectorAll(".food-btn").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".food-btn").forEach(el => el.classList.remove("active"));
+                    btn.classList.add("active");
+                    renderFood(btn.dataset.food);
+                });
+            });
+        }
+
+        function initChart() {
+            const ctx = document.getElementById("travelChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["台→滬", "滬→杭", "杭→烏", "烏→滬"],
+                    datasets: [{
+                        label: "預計交通時間 (分鐘)",
+                        data: [120, 60, 60, 100],
+                        backgroundColor: "rgba(31, 79, 70, 0.75)",
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: "rgba(181, 135, 79, 0.15)" } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        window.addEventListener("load", () => {
+            bindEvents();
+            renderFood();
+            initChart();
+        });
+    </script>
+</body>
+</html>

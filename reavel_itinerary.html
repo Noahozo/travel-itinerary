@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滬杭烏 6日精奢之旅 - 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; scroll-behavior: smooth; background-color: #f8fafc; }
+        .nav-active { border-bottom: 2px solid #3b82f6; color: #3b82f6; }
+        .timeline-line::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <span class="font-bold text-xl text-blue-600">TravelDesign.</span>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="switchTab('overview')" class="nav-link nav-active py-2">行程總覽</button>
+                    <button onclick="switchTab('itinerary')" class="nav-link py-2">每日行程</button>
+                    <button onclick="switchTab('food')" class="nav-link py-2">美食地圖</button>
+                    <button onclick="switchTab('spa')" class="nav-link py-2">足浴洗浴</button>
+                    <button onclick="switchTab('transport')" class="nav-link py-2">交通住宿</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 px-4 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">上海・杭州・烏鎮</h1>
+            <p class="text-lg text-slate-600">2026/06/10 – 06/15 | 6人精奢包車遊</p>
+            <div class="mt-8 flex justify-center gap-4 flex-wrap">
+                <span class="px-4 py-2 bg-white rounded-full shadow-sm text-sm">#網紅打卡</span>
+                <span class="px-4 py-2 bg-white rounded-full shadow-sm text-sm">#足浴放鬆</span>
+                <span class="px-4 py-2 bg-white rounded-full shadow-sm text-sm">#宮廷饗宴</span>
+                <span class="px-4 py-2 bg-white rounded-full shadow-sm text-sm">#湯泉洗浴</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        
+        <section id="overview" class="tab-content active space-y-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-8 rounded-2xl shadow-sm">
+                    <h2 class="text-2xl font-bold mb-6">行程路線分析</h2>
+                    <canvas id="travelChart" height="200"></canvas>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold">為什麼這樣安排？</h3>
+                    <p class="text-slate-600">我們採用「入境杭州、出境上海」的邏輯，避免重複路網。前段安排杭州的自然與人文，中段在烏鎮感受古鎮寧靜，後段則在魔都上海盡情狂歡與購物。全程穿插專業足浴與SPA，確保行程「不走斷腿」。</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <p class="text-blue-600 font-bold">總里程</p>
+                            <p class="text-2xl font-bold">約 380km</p>
+                        </div>
+                        <div class="p-4 bg-indigo-50 rounded-lg">
+                            <p class="text-indigo-600 font-bold">放鬆行程</p>
+                            <p class="text-2xl font-bold">3 場 SPA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="itinerary" class="tab-content space-y-12">
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Day 1 | 6/10 啟程：初見西湖</h2>
+                <div class="relative pl-10 timeline-line space-y-8">
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">09:55 抵達桃園機場 → 前往上海</p>
+                        <p class="text-sm text-slate-500">搭乘長榮航空BR712 (2hr) | <a href="https://www.google.com/maps/search/Taoyuan+International+Airport" target="_blank" class="text-blue-500 underline">地圖導航</a></p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">12:05 抵達上海浦東機場 → 前往杭州</p>
+                        <p class="text-sm text-slate-500">高鐵移動 (1hr) | <a href="https://www.google.com/maps/search/Shanghai+Hongqiao+Railway+Station" target="_blank" class="text-blue-500 underline">地圖導航</a></p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">16:00 杭州西湖 - 湖濱步道散步</p>
+                        <p class="text-sm text-slate-500">建議停留：2小時 | 適合拍日落 | <a href="https://www.google.com/maps/search/West+Lake+Hangzhou" target="_blank" class="text-blue-500 underline">地圖導航</a></p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">20:00 杭州在地足浴體驗</p>
+                        <p class="text-sm text-slate-500">推薦：中經堂 / 皇庭記 / 紫蓮花足道</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Day 2 | 6/11 杭州：宮廷盛宴與靈隱</h2>
+                <div class="relative pl-10 timeline-line space-y-8">
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">09:00 靈隱寺 / 飛來峰</p>
+                        <p class="text-sm text-slate-500">建議停留：3小時 | 禪意打卡必去 | <a href="https://www.google.com/maps/search/Lingyin+Temple" target="_blank" class="text-blue-500 underline">地圖導航</a></p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-red-400 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold underline">12:30 重點：宮廷宴 午餐</p>
+                        <p class="text-sm text-slate-500">杭州特色奢華饗宴 | 體驗古風氛圍</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">15:30 小河直街歷史街區</p>
+                        <p class="text-sm text-slate-500">文青感十足的運河古街 | 適合拍照</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+                <h2 class="text-2xl font-bold text-blue-600 mb-6">Day 3 | 6/12 轉場：烏鎮夢迴水鄉</h2>
+                <div class="relative pl-10 timeline-line space-y-8">
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">10:00 包車前往烏鎮 (西柵)</p>
+                        <p class="text-sm text-slate-500">車程約 1hr | 6人包車最舒適</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">14:00 烏鎮西柵景區悠遊</p>
+                        <p class="text-sm text-slate-500">體驗搖櫓船、染坊打卡 | <a href="https://www.google.com/maps/search/Wuzhen+Xizha" target="_blank" class="text-blue-500 underline">地圖導航</a></p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 w-5 h-5 bg-slate-300 rounded-full border-4 border-white shadow-sm"></div>
+                        <p class="font-bold">20:00 夜遊烏鎮後 → 包車前往上海住宿</p>
+                        <p class="text-sm text-slate-500">抵達上海靜安區 Homestay</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500">
+                <p class="font-bold">Day 4-6 上海亮點：</p>
+                <ul class="list-disc ml-5 mt-2 space-y-1 text-sm">
+                    <li>Day 4: 豫園、田子坊、外灘夜景 + 露台酒吧 + 足浴SPA</li>
+                    <li>Day 5: 東方明珠、法租界武康路咖啡、南京西路購物 + 湯泉洗浴</li>
+                    <li>Day 6: 早午餐後前往機場返台</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="food" class="tab-content space-y-8">
+            <div class="flex flex-wrap gap-4 mb-8">
+                <button onclick="filterFood('all')" class="food-btn px-6 py-2 rounded-full bg-blue-600 text-white">全部</button>
+                <button onclick="filterFood('hangzhou')" class="food-btn px-6 py-2 rounded-full bg-white shadow-sm">杭州菜</button>
+                <button onclick="filterFood('shanghai')" class="food-btn px-6 py-2 rounded-full bg-white shadow-sm">上海菜</button>
+                <button onclick="filterFood('snack')" class="food-btn px-6 py-2 rounded-full bg-white shadow-sm">特色小吃</button>
+            </div>
+
+            <div id="foodGrid" class="grid md:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+        <section id="spa" class="tab-content space-y-8">
+            <h2 class="text-2xl font-bold mb-6">足浴 & 洗浴中心推薦</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">🇨🇳 杭州足浴推薦</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li>• <strong>中經堂（湖濱店）</strong>：中醫經絡推拿，解疲勞首選</li>
+                        <li>• <strong>皇庭記影院式足道</strong>：投影大包廂，附免費餐點</li>
+                        <li>• <strong>紫蓮花足道（慶春路）</strong>：中式手法穩定，CP值高</li>
+                        <li>• <strong>樂尚薈足道SPA</strong>：市中心高端，適合團體</li>
+                        <li>• <strong>沈園堂</strong>：藥浴+艾灸，深度養生放鬆</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">🇨🇳 上海足浴推薦</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li>• <strong>大桶大足浴</strong>：全網連鎖，價格親民，附茶點水果</li>
+                        <li>• <strong>璞·澐間影院足道</strong>：高空景觀，邊按摩邊看電影</li>
+                        <li>• <strong>蘭·泰式古法按摩</strong>：泰式拉伸，環境安靜舒適</li>
+                        <li>• <strong>域SPA（新天地）</strong>：輕奢風格，適合商務放鬆</li>
+                        <li>• <strong>指沐足浴</strong>：營業至凌晨，夜貓首選</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm md:col-span-2">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">🛁 上海頂級洗浴/湯泉中心</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="font-bold">曲水蘭亭（虹橋店）</p>
+                            <p class="text-slate-600">頂奢湯泉，海鮮自助，環境極佳</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">水裹·湯泉生活</p>
+                            <p class="text-slate-600">網紅湯泉，車厘子/榴蓮自由，可過夜</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">湯連得（長壽路）</p>
+                            <p class="text-slate-600">韓式汗蒸，價格實惠，家庭友好</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">漾·SPACE（陸家嘴）</p>
+                            <p class="text-slate-600">藝術湯泉，PS5+全息投影，年輕人愛去</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="transport" class="tab-content space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-blue-600">🏨 住宿資訊</h3>
+                    <div class="space-y-4">
+                        <div class="border-b pb-4">
+                            <p class="font-bold">杭州 (6/10-12)</p>
+                            <p class="text-slate-600">杭州西湖嘉宏酒店河坊街店</p>
+                            <a href="https://www.google.com/maps/search/杭州西湖嘉宏酒店河坊街店" class="text-xs text-blue-400 underline">開啟地圖</a>
+                        </div>
+                        <div>
+                            <p class="font-bold">上海 (6/12-15)</p>
+                            <p class="text-slate-600">Tonight Homestay (靜安區)</p>
+                            <a href="https://www.google.com/maps/search/West+Nanjing+Road+Shanghai" class="text-xs text-blue-400 underline">開啟地圖</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-blue-600">🚌 交通筆記</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li>• <strong>上海 ⇄ 杭州：</strong> 高鐵 1 小時，建議提前 15 天訂票。</li>
+                        <li>• <strong>烏鎮段：</strong> 建議 6 人直接預約包車，直達飯店最輕鬆。</li>
+                        <li>• <strong>上海市區：</strong> 地鐵極速但人多，推薦 3 人一組分兩台「滴滴」打車。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-white py-12 mt-12 text-center">
+        <p>© 2026 滬杭烏專屬行程規劃 - 享受每一段旅程</p>
+    </footer>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('nav-active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('nav-active');
+        }
+
+        // Food Data & Filtering
+        const foodData = [
+            // 杭州菜
+            { name: '樓外樓（西湖店）', city: 'hangzhou', cat: 'hangzhou', desc: '東坡肉、西湖醋魚、龍井蝦仁', map: 'Lou+Wai+Lou+Hangzhou' },
+            { name: '知味觀', city: 'hangzhou', cat: 'hangzhou', desc: '叫花雞、宋嫂魚羹、杭幫經典', map: '知味觀+杭州' },
+            { name: '奎元館', city: 'hangzhou', cat: 'hangzhou', desc: '片兒川、蝦爆鱔麵', map: '奎元館+杭州' },
+            { name: '新白鹿餐廳', city: 'hangzhou', cat: 'hangzhou', desc: '高CP值杭幫菜', map: '新白鹿+杭州' },
+            
+            // 上海菜
+            { name: '上海老飯店', city: 'shanghai', cat: 'shanghai', desc: '八寶鴨、響油鱔糊、本幫菜鼻祖', map: '上海老飯店+南京東路' },
+            { name: '德興館', city: 'shanghai', cat: 'shanghai', desc: '草頭圈子、濃油赤酱', map: '德興館+上海' },
+            
+            // 小吃
+            { name: '南翔小籠包', city: 'shanghai', cat: 'snack', desc: '豫園經典小籠', map: 'Nanxiang+Xiaolongbao+Shanghai' },
+            { name: '小楊生煎', city: 'shanghai', cat: 'snack', desc: '上海必吃生煎', map: '小楊生煎+上海' },
+            { name: '鮮得來排骨年糕', city: 'shanghai', cat: 'snack', desc: '排骨+年糕+甜辣醬', map: '鮮得來+排骨年糕+上海' },
+            { name: '佳家湯包', city: 'shanghai', cat: 'snack', desc: '皮薄湯多蟹粉湯包', map: 'Jia+Jia+Tang+Bao+Shanghai' },
+            { name: '阿大蔥油餅', city: 'shanghai', cat: 'snack', desc: '老上海街頭靈魂', map: '阿大蔥油餅+上海' }
+        ];
+
+        function renderFood(filter = 'all') {
+            const grid = document.getElementById('foodGrid');
+            grid.innerHTML = '';
+            const filtered = filter === 'all' ? foodData : foodData.filter(f => f.cat === filter);
+            
+            filtered.forEach(item => {
+                grid.innerHTML += `
+                    <div class="bg-white p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow">
+                        <div class="text-blue-500 mb-2 font-bold">${item.cat === 'hangzhou' ? '📍杭州' : '📍上海'}</div>
+                        <h4 class="text-lg font-bold mb-1">${item.name}</h4>
+                        <p class="text-sm text-slate-500 mb-3">${item.desc}</p>
+                        <a href="https://www.google.com/maps/search/${item.map}" target="_blank" class="text-xs bg-slate-100 px-3 py-1 rounded text-slate-600 hover:bg-blue-50">查看地圖</a>
+                    </div>
+                `;
+            });
+        }
+
+        function filterFood(cat) {
+            document.querySelectorAll('.food-btn').forEach(btn => btn.classList.replace('bg-blue-600', 'bg-white'));
+            document.querySelectorAll('.food-btn').forEach(btn => btn.classList.remove('text-white'));
+            event.target.classList.replace('bg-white', 'bg-blue-600');
+            event.target.classList.add('text-white');
+            renderFood(cat);
+        }
+
+        // Initialize Chart
+        function initChart() {
+            const ctx = document.getElementById('travelChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['台→滬', '滬→杭', '杭→烏', '烏→滬'],
+                    datasets: [{
+                        label: '預計交通時間 (分鐘)',
+                        data: [120, 60, 60, 100],
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        // Startup
+        window.onload = () => {
+            renderFood();
+            initChart();
+        };
+    </script>
+</body>
+</html>
