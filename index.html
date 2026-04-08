@@ -133,6 +133,11 @@
             background: #f4ede2;
             border-bottom-color: transparent;
         }
+
+        .todo-item.done .todo-text {
+            text-decoration: line-through;
+            opacity: 0.65;
+        }
     </style>
 </head>
 <body>
@@ -202,6 +207,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="panel p-6 md:p-7">
+                <h3 class="section-title text-xl font-bold mb-4">行前待辦事項</h3>
+                <ul class="space-y-2 text-[#6d665f]">
+                    <li class="todo-item flex items-center gap-2" data-todo-id="permit">
+                        <input class="todo-checkbox accent-[#1f4f46] w-4 h-4" type="checkbox" id="todo-permit">
+                        <label class="todo-text cursor-pointer" for="todo-permit">台胞證還沒辦</label>
+                    </li>
+                    <li class="todo-item flex items-center gap-2" data-todo-id="train">
+                        <input class="todo-checkbox accent-[#1f4f46] w-4 h-4" type="checkbox" id="todo-train">
+                        <label class="todo-text cursor-pointer" for="todo-train">高鐵還沒訂</label>
+                    </li>
+                    <li class="todo-item flex items-center gap-2" data-todo-id="banquet">
+                        <input class="todo-checkbox accent-[#1f4f46] w-4 h-4" type="checkbox" id="todo-banquet">
+                        <label class="todo-text cursor-pointer" for="todo-banquet">杭州宮宴還沒訂</label>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -464,6 +486,33 @@
             `).join("");
         }
 
+        function applyTodoState() {
+            document.querySelectorAll(".todo-item").forEach(item => {
+                const checkbox = item.querySelector(".todo-checkbox");
+                item.classList.toggle("done", checkbox.checked);
+            });
+        }
+
+        function loadTodos() {
+            const saved = JSON.parse(localStorage.getItem("trip_todos_2026") || "{}");
+            document.querySelectorAll(".todo-item").forEach(item => {
+                const checkbox = item.querySelector(".todo-checkbox");
+                const todoId = item.dataset.todoId;
+                checkbox.checked = Boolean(saved[todoId]);
+            });
+            applyTodoState();
+        }
+
+        function saveTodos() {
+            const data = {};
+            document.querySelectorAll(".todo-item").forEach(item => {
+                const checkbox = item.querySelector(".todo-checkbox");
+                data[item.dataset.todoId] = checkbox.checked;
+            });
+            localStorage.setItem("trip_todos_2026", JSON.stringify(data));
+            applyTodoState();
+        }
+
         function bindEvents() {
             document.querySelectorAll(".nav-link").forEach(btn => {
                 btn.addEventListener("click", () => switchTab(btn.dataset.tab));
@@ -480,6 +529,10 @@
             window.addEventListener("hashchange", () => {
                 const hashTab = location.hash.replace("#", "");
                 switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
+            });
+
+            document.querySelectorAll(".todo-checkbox").forEach(checkbox => {
+                checkbox.addEventListener("change", saveTodos);
             });
         }
 
@@ -512,6 +565,7 @@
             const hashTab = location.hash.replace("#", "");
             switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
             renderFood();
+            loadTodos();
             initChart();
         });
     </script>
