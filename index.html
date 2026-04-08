@@ -109,13 +109,37 @@
 
         .food-btn:hover { color: var(--primary); }
         .food-btn.active:hover { color: #fff; }
+
+        .mobile-bottom-nav {
+            background: rgba(255, 250, 242, 0.97);
+            border-top: 1px solid var(--line);
+            backdrop-filter: blur(8px);
+        }
+
+        .mobile-bottom-tab {
+            color: var(--muted);
+            font-size: 0.72rem;
+            line-height: 1.1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.15rem;
+            padding: 0.35rem 0.2rem;
+            border-radius: 0.6rem;
+        }
+
+        .mobile-bottom-tab.nav-active {
+            color: var(--primary);
+            background: #f4ede2;
+            border-bottom-color: transparent;
+        }
     </style>
 </head>
 <body>
     <nav class="fixed top-0 w-full z-50 border-b border-[#e7dac8] bg-[#fffaf2]/90 backdrop-blur-md">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
-                <span class="text-lg md:text-xl font-bold text-[#1f4f46]">Voyage Atelier</span>
+                <span class="text-lg md:text-xl font-bold text-[#1f4f46]">黑云冠柚柏霖</span>
                 <div class="hidden md:flex gap-6 text-sm">
                     <button data-tab="overview" class="nav-link nav-active">行程總覽</button>
                     <button data-tab="itinerary" class="nav-link">每日行程</button>
@@ -152,7 +176,7 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 pb-14">
+    <main class="max-w-6xl mx-auto px-4 pb-28 md:pb-14">
         <section id="overview" class="tab-content active space-y-8">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="panel p-7 md:p-8">
@@ -386,6 +410,17 @@
         </section>
     </main>
 
+    <nav class="mobile-bottom-nav fixed bottom-0 inset-x-0 z-50 md:hidden px-3 py-2">
+        <div class="grid grid-cols-6 gap-1">
+            <button data-tab="overview" class="nav-link mobile-bottom-tab nav-active"><span>總覽</span></button>
+            <button data-tab="itinerary" class="nav-link mobile-bottom-tab"><span>行程</span></button>
+            <button data-tab="food" class="nav-link mobile-bottom-tab"><span>美食</span></button>
+            <button data-tab="spa" class="nav-link mobile-bottom-tab"><span>足浴</span></button>
+            <button data-tab="night" class="nav-link mobile-bottom-tab"><span>夜生活</span></button>
+            <button data-tab="transport" class="nav-link mobile-bottom-tab"><span>交通</span></button>
+        </div>
+    </nav>
+
     <footer class="mt-16 py-10 text-center text-sm text-[#7a726a] border-t border-[#e7dac8]">
         <p>© 2026 滬杭烏專屬行程規劃 · 享受每一段旅程</p>
     </footer>
@@ -405,11 +440,15 @@
             { name: "阿大蔥油餅", cat: "snack", desc: "老上海街頭靈魂", map: "阿大蔥油餅+上海" }
         ];
 
-        function switchTab(tabId) {
+        const validTabs = new Set(["overview", "itinerary", "food", "spa", "night", "transport"]);
+
+        function switchTab(tabId, updateHash = true) {
+            if (!validTabs.has(tabId)) return;
             document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("nav-active"));
             document.getElementById(tabId).classList.add("active");
             document.querySelectorAll(`.nav-link[data-tab="${tabId}"]`).forEach(el => el.classList.add("nav-active"));
+            if (updateHash) history.replaceState(null, "", `#${tabId}`);
         }
 
         function renderFood(filter = "all") {
@@ -436,6 +475,11 @@
                     btn.classList.add("active");
                     renderFood(btn.dataset.food);
                 });
+            });
+
+            window.addEventListener("hashchange", () => {
+                const hashTab = location.hash.replace("#", "");
+                switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
             });
         }
 
@@ -465,6 +509,8 @@
 
         window.addEventListener("load", () => {
             bindEvents();
+            const hashTab = location.hash.replace("#", "");
+            switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
             renderFood();
             initChart();
         });
