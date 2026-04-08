@@ -432,6 +432,20 @@
                 <button class="food-btn px-5 py-2 rounded-full text-sm" data-food="shanghai">上海菜</button>
                 <button class="food-btn px-5 py-2 rounded-full text-sm" data-food="snack">特色小吃</button>
             </div>
+            <div class="panel p-4 md:p-5">
+                <p class="text-sm text-[#6d665f] mb-3">新增 / 刪減美食清單</p>
+                <div class="grid md:grid-cols-4 gap-2">
+                    <input id="food-name-input" type="text" placeholder="餐廳名稱" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
+                    <select id="food-cat-input" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
+                        <option value="hangzhou">杭州菜</option>
+                        <option value="shanghai">上海菜</option>
+                        <option value="snack">特色小吃</option>
+                    </select>
+                    <input id="food-desc-input" type="text" placeholder="特色描述" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
+                    <input id="food-map-input" type="text" placeholder="地圖搜尋關鍵字（可空白）" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
+                </div>
+                <button id="food-add-btn" type="button" class="mt-3 rounded-lg bg-[#1f4f46] text-white px-4 py-2 text-sm hover:opacity-90">+ 新增美食</button>
+            </div>
             <div id="foodGrid" class="grid md:grid-cols-3 gap-6"></div>
         </section>
 
@@ -440,45 +454,88 @@
 
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 杭州足浴推薦</h3>
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 杭州足浴按摩推荐（新增）</h3>
                     <ul class="space-y-3 text-sm text-[#6d665f]">
-                        <li>• <strong>中經堂（湖濱店）</strong>：中醫經絡推拿，解疲勞首選</li>
-                        <li>• <strong>皇庭記影院式足道</strong>：投影大包廂，附免費餐點</li>
-                        <li>• <strong>紫蓮花足道（慶春路）</strong>：中式手法穩定，CP值高</li>
-                        <li>• <strong>樂尚薈足道SPA</strong>：市中心高端，適合團體</li>
-                        <li>• <strong>沈園堂</strong>：藥浴+艾灸，深度養生放鬆</li>
+                        <li>• <strong>中经堂（湖滨店/城西银泰店）</strong>：专业中医经络推拿，舒缓疲劳、调理肩颈效果出众</li>
+                        <li>• <strong>皇庭记影院式足道</strong>：影院式大包间，配套免费简餐小吃，观影放松两不误</li>
+                        <li>• <strong>紫莲花足道（庆春路店）</strong>：传统中式手法娴熟，性价比高，日常放松首选</li>
+                        <li>• <strong>乐尚荟足道SPA</strong>：市中心高端环境，适合朋友、团体小聚，私密性佳</li>
+                        <li>• <strong>沈园堂</strong>：药浴熏蒸搭配艾灸，主打深度养生放松，适合长期伏案人群</li>
+                        <li>• <strong>臻本足道</strong>：口碑稳定，手法专业，价格适中，适合高频放松</li>
+                        <li>• <strong>暹罗·素可泰高端泰式按摩SPA会所</strong>：正宗泰式古法拉伸，环境雅致，体验感强</li>
+                        <li>• <strong>千江月影院式足道</strong>：影院式包间，提供免费简餐，城西银泰附近便捷</li>
+                        <li>• <strong>善若水足道</strong>：社区口碑店，手法温和，性价比高，适合周边居民</li>
+                        <li>• <strong>清沐轩影院式足道·SPA</strong>：新店开业福利多，影院式沉浸式体验，环境安静</li>
+                        <li>• <strong>沐菓子（滨江东和时代店）</strong>：1000㎡超大空间，免费小火锅、牛排等简餐，停车免费</li>
                     </ul>
                 </div>
 
                 <div class="panel p-6">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 上海足浴推薦</h3>
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🇨🇳 上海足浴按摩推荐（新增）</h3>
                     <ul class="space-y-3 text-sm text-[#6d665f]">
-                        <li>• <strong>大桶大足浴</strong>：全網連鎖，價格親民，附茶點水果</li>
-                        <li>• <strong>璞·澐間影院足道</strong>：高空景觀，邊按摩邊看電影</li>
-                        <li>• <strong>蘭·泰式古法按摩</strong>：泰式拉伸，環境安靜舒適</li>
-                        <li>• <strong>域SPA（新天地）</strong>：輕奢風格，適合商務放鬆</li>
-                        <li>• <strong>指沐足浴</strong>：營業至凌晨，夜貓首選</li>
+                        <li>• <strong>大桶大足浴</strong>：连锁品牌口碑稳定，价格亲民，提供茶点水果，69-109元基础套餐热销</li>
+                        <li>• <strong>璞·澐间影院足道</strong>：高空景观视野佳，边按摩边看电影，适合夜景放松</li>
+                        <li>• <strong>兰·泰式古法按摩</strong>：正宗泰式拉伸放松，环境安静雅致，缓解肌肉紧张效果好</li>
+                        <li>• <strong>域SPA（新天地店）</strong>：轻奢简约风格，适合商务休闲放松，私密性与体验感俱佳</li>
+                        <li>• <strong>指沐足浴</strong>：营业至凌晨，深夜放松好去处，24小时服务便捷</li>
+                        <li>• <strong>莲SPA足道养生馆（中山公园店）</strong>：高口碑连锁，环境舒适，服务专业</li>
+                        <li>• <strong>日本天然药石浴·逸生堂·按摩</strong>：药石浴特色，舒缓身心，古北商圈高端体验</li>
+                        <li>• <strong>康道按摩</strong>：专业理疗，针对肩颈腰劳损，适合上班族调理</li>
+                        <li>• <strong>国医整脊馆（武夷路店）</strong>：中医整脊专业，缓解脊柱问题，长宁区口碑店</li>
+                        <li>• <strong>Together Massage（天山店）</strong>：轻养生按摩，环境温馨，适合日常放松</li>
                     </ul>
                 </div>
 
                 <div class="panel p-6 md:col-span-2">
-                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🛁 上海頂級洗浴/湯泉中心</h3>
+                    <h3 class="text-xl font-bold text-[#1f4f46] mb-4">🛁 杭州/上海高端洗浴/汤泉中心（新增）</h3>
                     <div class="grid md:grid-cols-2 gap-4 text-sm">
                         <div>
-                            <p class="font-bold">曲水蘭亭（虹橋店）</p>
-                            <p class="text-[#6d665f]">頂奢湯泉，海鮮自助，環境極佳</p>
+                            <p class="font-bold">曲水兰亭（杭州钱江世纪公园店/上海虹桥店）</p>
+                            <p class="text-[#6d665f]">顶奢汤泉，8000+㎡空间，海鲜自助（帝王蟹/鳌虾），法尔曼/戴森配置，24小时营业</p>
                         </div>
                         <div>
-                            <p class="font-bold">水裹·湯泉生活</p>
-                            <p class="text-[#6d665f]">網紅湯泉，車厘子/榴蓮自由，可過夜</p>
+                            <p class="font-bold">水裹·汤泉生活（杭州钱江世纪店/上海虹桥/五角场店）</p>
+                            <p class="text-[#6d665f]">网红轻奢汤泉，车厘子/榴莲/椰皇自由，24小时开放，可过夜，水果饮品畅吃</p>
                         </div>
                         <div>
-                            <p class="font-bold">湯連得（長壽路）</p>
-                            <p class="text-[#6d665f]">韓式汗蒸，價格實惠，家庭友好</p>
+                            <p class="font-bold">汤连得（上海长寿路总店/杭州多家分店）</p>
+                            <p class="text-[#6d665f]">韩式汗蒸洗浴标杆，价格实惠，家庭友好，韩式料理与汗蒸设施齐全</p>
                         </div>
                         <div>
-                            <p class="font-bold">漾·SPACE（陸家嘴）</p>
-                            <p class="text-[#6d665f]">藝術湯泉，PS5+全息投影，年輕人愛去</p>
+                            <p class="font-bold">漾·SPACE（上海陆家嘴店/杭州多家分店）</p>
+                            <p class="text-[#6d665f]">艺术汤泉，1.2亿投资，智能灯光+PS5+全息投影，年轻人打卡首选</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">沐屿新集（杭州店/上海店）</p>
+                            <p class="text-[#6d665f]">高端轻奢汤泉，海鲜自助（小青龙/三文鱼/燕窝桃胶），大牌洗护，10000+㎡空间</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">海纳百川（杭州西湖区店）</p>
+                            <p class="text-[#6d665f]">智能型温泉生活馆，集沐足、SPA、汗蒸、茶艺、餐饮于一体，一站式放松</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">胤隆汇（杭州上城区店）</p>
+                            <p class="text-[#6d665f]">老牌洗浴中心，24小时自助餐，免费休闲区（台球/电竞/阅读室），适合家庭聚会</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">海茵汇温泉（杭州滨江店）</p>
+                            <p class="text-[#6d665f]">20000㎡超大规模，温泉+汗蒸+足浴+SPA，三文鱼/小龙虾畅吃，性价比高</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">涟泉大江户（上海莘庄总店）</p>
+                            <p class="text-[#6d665f]">沉浸式日式温泉，和服拍照、星空木屋、江户街景，适合亲子与打卡</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">淇奥沐舍（上海虹口店）</p>
+                            <p class="text-[#6d665f]">东方美学设计，PS5+电竞房+棋牌室，网红沐足+港式采耳套餐，免费停车</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">汤源温泉（杭州拱墅区店）</p>
+                            <p class="text-[#6d665f]">20000㎡艺术空间，智能泡池+露天泳池夜景，非遗搓澡+烧鸟派对，仪式感拉满</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">纽斯洗浴SPA（杭州未来科技城旗舰店）</p>
+                            <p class="text-[#6d665f]">12000㎡日式温泉馆，24小时营业，日式泡池与汗蒸设施，适合周边通勤族</p>
                         </div>
                     </div>
                 </div>
@@ -610,24 +667,41 @@
     </footer>
 
     <script>
-        const foodData = [
-            { name: "樓外樓（西湖店）", cat: "hangzhou", desc: "東坡肉、西湖醋魚、龍井蝦仁", map: "Lou+Wai+Lou+Hangzhou" },
-            { name: "知味觀", cat: "hangzhou", desc: "叫花雞、宋嫂魚羹、杭幫經典", map: "知味觀+杭州" },
-            { name: "奎元館", cat: "hangzhou", desc: "片兒川、蝦爆鱔麵", map: "奎元館+杭州" },
-            { name: "新白鹿餐廳", cat: "hangzhou", desc: "高 CP 值杭幫菜", map: "新白鹿+杭州" },
-            { name: "上海老飯店", cat: "shanghai", desc: "八寶鴨、響油鱔糊、本幫菜鼻祖", map: "上海老飯店+南京東路" },
-            { name: "德興館", cat: "shanghai", desc: "草頭圈子、濃油赤醬", map: "德興館+上海" },
-            { name: "南翔小籠包", cat: "snack", desc: "豫園經典小籠", map: "Nanxiang+Xiaolongbao+Shanghai" },
-            { name: "小楊生煎", cat: "snack", desc: "上海必吃生煎", map: "小楊生煎+上海" },
-            { name: "鮮得來排骨年糕", cat: "snack", desc: "排骨+年糕+甜辣醬", map: "鮮得來+排骨年糕+上海" },
-            { name: "佳家湯包", cat: "snack", desc: "皮薄湯多蟹粉湯包", map: "Jia+Jia+Tang+Bao+Shanghai" },
-            { name: "阿大蔥油餅", cat: "snack", desc: "老上海街頭靈魂", map: "阿大蔥油餅+上海" }
+        const defaultFoodData = [
+            { id: "f1", name: "樓外樓（西湖店）", cat: "hangzhou", desc: "東坡肉、西湖醋魚、龍井蝦仁", map: "Lou+Wai+Lou+Hangzhou" },
+            { id: "f2", name: "知味觀", cat: "hangzhou", desc: "叫花雞、宋嫂魚羹、杭幫經典", map: "知味觀+杭州" },
+            { id: "f3", name: "奎元館", cat: "hangzhou", desc: "片兒川、蝦爆鱔麵", map: "奎元館+杭州" },
+            { id: "f4", name: "新白鹿餐廳", cat: "hangzhou", desc: "高 CP 值杭幫菜", map: "新白鹿+杭州" },
+            { id: "f5", name: "上海老飯店", cat: "shanghai", desc: "八寶鴨、響油鱔糊、本幫菜鼻祖", map: "上海老飯店+南京東路" },
+            { id: "f6", name: "德興館", cat: "shanghai", desc: "草頭圈子、濃油赤醬", map: "德興館+上海" },
+            { id: "f7", name: "南翔小籠包", cat: "snack", desc: "豫園經典小籠", map: "Nanxiang+Xiaolongbao+Shanghai" },
+            { id: "f8", name: "小楊生煎", cat: "snack", desc: "上海必吃生煎", map: "小楊生煎+上海" },
+            { id: "f9", name: "鮮得來排骨年糕", cat: "snack", desc: "排骨+年糕+甜辣醬", map: "鮮得來+排骨年糕+上海" },
+            { id: "f10", name: "佳家湯包", cat: "snack", desc: "皮薄湯多蟹粉湯包", map: "Jia+Jia+Tang+Bao+Shanghai" },
+            { id: "f11", name: "阿大蔥油餅", cat: "snack", desc: "老上海街頭靈魂", map: "阿大蔥油餅+上海" }
         ];
+        let foodData = [...defaultFoodData];
+        let selectedFoodFilter = "all";
 
         const validTabs = new Set(["overview", "itinerary", "food", "spa", "night", "transport"]);
+        const NIGHT_TAB_PIN = "777";
+        const NIGHT_TAB_SESSION_KEY = "night_tab_unlocked_2026";
+
+        function ensureNightTabUnlocked() {
+            if (sessionStorage.getItem(NIGHT_TAB_SESSION_KEY) === "true") return true;
+            const inputPin = window.prompt("請輸入密碼：");
+            if (inputPin === null) return false;
+            if (inputPin.trim() === NIGHT_TAB_PIN) {
+                sessionStorage.setItem(NIGHT_TAB_SESSION_KEY, "true");
+                return true;
+            }
+            window.alert("錯誤，請找Noah要密碼。");
+            return false;
+        }
 
         function switchTab(tabId, updateHash = true) {
             if (!validTabs.has(tabId)) return;
+            if (tabId === "night" && !ensureNightTabUnlocked()) return;
             document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("nav-active"));
             document.getElementById(tabId).classList.add("active");
@@ -636,6 +710,7 @@
         }
 
         function renderFood(filter = "all") {
+            selectedFoodFilter = filter;
             const grid = document.getElementById("foodGrid");
             const filtered = filter === "all" ? foodData : foodData.filter(f => f.cat === filter);
             grid.innerHTML = filtered.map(item => `
@@ -643,9 +718,51 @@
                     <p class="text-xs tracking-wide text-[#8b7e72] mb-2">${item.cat === "hangzhou" ? "HANGZHOU" : item.cat === "shanghai" ? "SHANGHAI" : "LOCAL SNACK"}</p>
                     <h4 class="text-lg font-bold mb-2 text-[#1f4f46]">${item.name}</h4>
                     <p class="text-sm text-[#6d665f] mb-4">${item.desc}</p>
-                    <a href="https://www.google.com/maps/search/${item.map}" target="_blank" class="inline-block text-xs px-3 py-1 rounded-full border border-[#d9ccb7] text-[#6d665f] hover:bg-[#f3ebe0]">查看地圖</a>
+                    <div class="flex items-center justify-between gap-2">
+                        <a href="https://www.google.com/maps/search/${item.map || item.name}" target="_blank" class="inline-block text-xs px-3 py-1 rounded-full border border-[#d9ccb7] text-[#6d665f] hover:bg-[#f3ebe0]">查看地圖</a>
+                        <button class="food-delete text-xs px-3 py-1 rounded-full border border-[#e6c9c9] text-[#9a5e5e] hover:bg-[#fdf0f0]" data-food-id="${item.id}">刪除</button>
+                    </div>
                 </article>
             `).join("");
+        }
+
+        function loadFoods() {
+            const savedFoods = JSON.parse(localStorage.getItem("trip_foods_2026") || "null");
+            foodData = Array.isArray(savedFoods) ? savedFoods : [...defaultFoodData];
+        }
+
+        function saveFoods() {
+            localStorage.setItem("trip_foods_2026", JSON.stringify(foodData));
+        }
+
+        function addFoodItem() {
+            const nameEl = document.getElementById("food-name-input");
+            const catEl = document.getElementById("food-cat-input");
+            const descEl = document.getElementById("food-desc-input");
+            const mapEl = document.getElementById("food-map-input");
+            const name = nameEl.value.trim();
+            const desc = descEl.value.trim();
+            if (!name || !desc) return;
+
+            const newItem = {
+                id: `f${Date.now()}`,
+                name,
+                cat: catEl.value,
+                desc,
+                map: mapEl.value.trim() || name
+            };
+            foodData.push(newItem);
+            saveFoods();
+            nameEl.value = "";
+            descEl.value = "";
+            mapEl.value = "";
+            renderFood(selectedFoodFilter);
+        }
+
+        function deleteFoodItem(id) {
+            foodData = foodData.filter(item => item.id !== id);
+            saveFoods();
+            renderFood(selectedFoodFilter);
         }
 
         function applyTodoState() {
@@ -722,6 +839,17 @@
                 });
             });
 
+            document.getElementById("food-add-btn").addEventListener("click", addFoodItem);
+            ["food-name-input", "food-desc-input", "food-map-input"].forEach(id => {
+                document.getElementById(id).addEventListener("keydown", (event) => {
+                    if (event.key === "Enter") addFoodItem();
+                });
+            });
+            document.getElementById("foodGrid").addEventListener("click", (event) => {
+                const deleteBtn = event.target.closest(".food-delete");
+                if (deleteBtn) deleteFoodItem(deleteBtn.dataset.foodId);
+            });
+
             window.addEventListener("hashchange", () => {
                 const hashTab = location.hash.replace("#", "");
                 switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
@@ -750,6 +878,7 @@
             bindEvents();
             const hashTab = location.hash.replace("#", "");
             switchTab(validTabs.has(hashTab) ? hashTab : "overview", false);
+            loadFoods();
             renderFood();
             loadTodos();
         });
