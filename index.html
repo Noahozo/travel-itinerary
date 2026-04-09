@@ -265,6 +265,15 @@
             font-size: 0.78rem;
         }
 
+        .food-photo {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            border: 1px solid #eadfce;
+            margin-bottom: 0.75rem;
+        }
+
         .hero-shell {
             position: relative;
             overflow: hidden;
@@ -549,7 +558,7 @@
             </div>
             <div class="panel p-4 md:p-5">
                 <p class="text-sm text-[#6d665f] mb-3">新增 / 刪減美食清單</p>
-                <div class="grid md:grid-cols-4 gap-2">
+                <div class="grid md:grid-cols-5 gap-2">
                     <input id="food-name-input" type="text" placeholder="餐廳名稱" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
                     <select id="food-cat-input" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
                         <option value="hangzhou">杭州菜</option>
@@ -558,6 +567,7 @@
                     </select>
                     <input id="food-desc-input" type="text" placeholder="特色描述" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
                     <input id="food-map-input" type="text" placeholder="地圖搜尋關鍵字（可空白）" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
+                    <input id="food-image-input" type="text" placeholder="圖片 URL（可空白）" class="rounded-lg border border-[#d9ccb7] px-3 py-2 text-sm outline-none focus:border-[#1f4f46]">
                 </div>
                 <button id="food-add-btn" type="button" class="mt-3 rounded-lg bg-[#1f4f46] text-white px-4 py-2 text-sm hover:opacity-90">+ 新增美食</button>
             </div>
@@ -827,17 +837,17 @@
 
     <script>
         const defaultFoodData = [
-            { id: "f1", name: "樓外樓（西湖店）", cat: "hangzhou", desc: "東坡肉、西湖醋魚、龍井蝦仁", map: "Lou+Wai+Lou+Hangzhou" },
-            { id: "f2", name: "知味觀", cat: "hangzhou", desc: "叫花雞、宋嫂魚羹、杭幫經典", map: "知味觀+杭州" },
-            { id: "f3", name: "奎元館", cat: "hangzhou", desc: "片兒川、蝦爆鱔麵", map: "奎元館+杭州" },
-            { id: "f4", name: "新白鹿餐廳", cat: "hangzhou", desc: "高 CP 值杭幫菜", map: "新白鹿+杭州" },
-            { id: "f5", name: "上海老飯店", cat: "shanghai", desc: "八寶鴨、響油鱔糊、本幫菜鼻祖", map: "上海老飯店+南京東路" },
-            { id: "f6", name: "德興館", cat: "shanghai", desc: "草頭圈子、濃油赤醬", map: "德興館+上海" },
-            { id: "f7", name: "南翔小籠包", cat: "snack", desc: "豫園經典小籠", map: "Nanxiang+Xiaolongbao+Shanghai" },
-            { id: "f8", name: "小楊生煎", cat: "snack", desc: "上海必吃生煎", map: "小楊生煎+上海" },
-            { id: "f9", name: "鮮得來排骨年糕", cat: "snack", desc: "排骨+年糕+甜辣醬", map: "鮮得來+排骨年糕+上海" },
-            { id: "f10", name: "佳家湯包", cat: "snack", desc: "皮薄湯多蟹粉湯包", map: "Jia+Jia+Tang+Bao+Shanghai" },
-            { id: "f11", name: "阿大蔥油餅", cat: "snack", desc: "老上海街頭靈魂", map: "阿大蔥油餅+上海" }
+            { id: "d1_f1", day: 1, order: 1, name: "佳家湯包", cat: "shanghai", desc: "蟹粉湯包、皮薄爆汁，在地人首選", map: "Jia+Jia+Tang+Bao+Shanghai", url: "https://www.google.com/maps/search/?api=1&query=佳家湯包+上海", image: "https://www.davidwin.net/wp-content/uploads/2014/11/IMG_20230616_133216.jpg" },
+            { id: "d1_f2", day: 1, order: 2, name: "小楊生煎", cat: "shanghai", desc: "外脆內爆汁生煎包", map: "Xiao+Yang+Sheng+Jian+Shanghai", url: "https://www.google.com/maps/search/?api=1&query=小楊生煎+上海", image: "https://i.ytimg.com/vi/7lC0TejO_sc/maxresdefault.jpg" },
+            { id: "d1_f3", day: 1, order: 3, name: "德興館", cat: "shanghai", desc: "濃油赤醬本幫菜、草頭圈子", map: "De+Xing+Guan+Shanghai", url: "https://www.google.com/maps/search/?api=1&query=德興館+上海", image: "https://i.ytimg.com/vi/UAOoOhlU98M/maxresdefault.jpg" },
+            { id: "d2_f1", day: 2, order: 1, name: "阿大蔥油餅", cat: "shanghai", desc: "排隊神店、外酥內Q", map: "A+Da+Cong+You+Bing+Shanghai", url: "https://www.google.com/maps/search/?api=1&query=阿大蔥油餅+上海", image: "https://i.ytimg.com/vi/lnil65txBtE/maxresdefault.jpg" },
+            { id: "d2_f2", day: 2, order: 2, name: "鮮得來排骨年糕", cat: "shanghai", desc: "排骨＋年糕甜辣經典", map: "Xian+De+Lai+Pai+Gu+Nian+Gao", url: "https://www.google.com/maps/search/?api=1&query=鮮得來排骨年糕+上海", image: "https://media-cdn.tripadvisor.com/media/daodao/photo-s/03/b6/bb/8a/caption.jpg" },
+            { id: "d2_f3", day: 2, order: 3, name: "上海老飯店", cat: "shanghai", desc: "八寶鴨、本幫菜代表", map: "Shanghai+Old+Restaurant+East+Nanjing+Rd", url: "https://www.google.com/maps/search/?api=1&query=上海老飯店+南京東路", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwpFRHdRNbrpIxxHO5TtD8W0tW1zFPPB2ZnA" },
+            { id: "d3_f1", day: 3, order: 1, name: "新白鹿餐廳", cat: "shanghai", desc: "高CP杭幫菜、蛋黃雞翅", map: "Xin+Bai+Lu+Shanghai", url: "https://www.google.com/maps/search/?api=1&query=新白鹿餐廳+上海", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRolklyz0vBJNYvLTtC7aq4bXDZujB_8Pr_sw" },
+            { id: "d3_f2", day: 3, order: 2, name: "南翔小籠包", cat: "shanghai", desc: "經典小籠（可體驗）", map: "Nan+Xiang+Xiao+Long+Bao+Yu+Yuan", url: "https://www.google.com/maps/search/?api=1&query=南翔小籠+豫園", image: "https://www.davidwin.net/wp-content/uploads/2020/12/IMG_4858.jpg" },
+            { id: "d4_f1", day: 4, order: 1, name: "知味觀", cat: "hangzhou", desc: "杭幫菜經典、叫花雞", map: "Zhi+Wei+Guan+Hangzhou", url: "https://www.google.com/maps/search/?api=1&query=知味觀+杭州", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaLQ3pueelQ3Za9yPwloxe8K5W6tTJ5zZurg" },
+            { id: "d4_f2", day: 4, order: 2, name: "奎元館", cat: "hangzhou", desc: "片兒川、在地麵館", map: "Kui+Yuan+Guan+Hangzhou", url: "https://www.google.com/maps/search/?api=1&query=奎元館+杭州", image: "https://g.udn.com.tw/upfiles/B_GL/gloomybear/PSN_PHOTO/845/f_26002845_1.JPG" },
+            { id: "d5_f1", day: 5, order: 1, name: "樓外樓（西湖店）", cat: "hangzhou", desc: "西湖景觀＋東坡肉（體驗型）", map: "Lou+Wai+Lou+West+Lake", url: "https://www.google.com/maps/search/?api=1&query=樓外樓+西湖店", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGWbgg5AT8rDBXBKB3nxCToj4n1dmtx3tTsA" }
         ];
         let foodData = [...defaultFoodData];
         let selectedFoodFilter = "all";
@@ -872,14 +882,25 @@
         function renderFood(filter = "all") {
             selectedFoodFilter = filter;
             const grid = document.getElementById("foodGrid");
-            const filtered = filter === "all" ? foodData : foodData.filter(f => f.cat === filter);
+            let filtered = filter === "all" ? foodData : foodData.filter(f => f.cat === filter);
+            filtered = filtered.slice().sort((a, b) => {
+                const da = a.day ?? 999;
+                const db = b.day ?? 999;
+                if (da !== db) return da - db;
+                return (a.order ?? 0) - (b.order ?? 0);
+            });
+            const fallbackFoodImage = (item) => {
+                const keyword = encodeURIComponent(`${item.name} ${item.cat === "hangzhou" ? "hangzhou food" : item.cat === "shanghai" ? "shanghai food" : "chinese snack"}`);
+                return `https://source.unsplash.com/800x500/?${keyword}`;
+            };
             grid.innerHTML = filtered.map(item => `
                 <article class="panel p-5">
+                    <img class="food-photo" src="${item.image || fallbackFoodImage(item)}" alt="${item.name}" loading="lazy" onerror="this.onerror=null;this.src='https://source.unsplash.com/800x500/?chinese,food';">
                     <p class="text-xs tracking-wide text-[#8b7e72] mb-2">${item.cat === "hangzhou" ? "HANGZHOU" : item.cat === "shanghai" ? "SHANGHAI" : "LOCAL SNACK"}</p>
                     <h4 class="text-lg font-bold mb-2 text-[#1f4f46]">${item.name}</h4>
                     <p class="text-sm text-[#6d665f] mb-4">${item.desc}</p>
                     <div class="flex items-center justify-between gap-2">
-                        <a href="https://www.google.com/maps/search/${item.map || item.name}" target="_blank" class="inline-block text-xs px-3 py-1 rounded-full border border-[#d9ccb7] text-[#6d665f] hover:bg-[#f3ebe0]">查看地圖</a>
+                        <a href="${item.url || `https://www.google.com/maps/search/${item.map || item.name}`}" target="_blank" class="inline-block text-xs px-3 py-1 rounded-full border border-[#d9ccb7] text-[#6d665f] hover:bg-[#f3ebe0]">查看地圖</a>
                         <button class="food-delete text-xs px-3 py-1 rounded-full border border-[#e6c9c9] text-[#9a5e5e] hover:bg-[#fdf0f0]" data-food-id="${item.id}">刪除</button>
                     </div>
                 </article>
@@ -909,6 +930,7 @@
             const catEl = document.getElementById("food-cat-input");
             const descEl = document.getElementById("food-desc-input");
             const mapEl = document.getElementById("food-map-input");
+            const imageEl = document.getElementById("food-image-input");
             const name = nameEl.value.trim();
             const desc = descEl.value.trim();
             if (!name || !desc) return;
@@ -918,13 +940,15 @@
                 name,
                 cat: catEl.value,
                 desc,
-                map: mapEl.value.trim() || name
+                map: mapEl.value.trim() || name,
+                image: imageEl.value.trim()
             };
             foodData.push(newItem);
             saveFoods();
             nameEl.value = "";
             descEl.value = "";
             mapEl.value = "";
+            imageEl.value = "";
             renderFood(selectedFoodFilter);
         }
 
@@ -1017,7 +1041,7 @@
             });
 
             document.getElementById("food-add-btn").addEventListener("click", addFoodItem);
-            ["food-name-input", "food-desc-input", "food-map-input"].forEach(id => {
+            ["food-name-input", "food-desc-input", "food-map-input", "food-image-input"].forEach(id => {
                 document.getElementById(id).addEventListener("keydown", (event) => {
                     if (event.key === "Enter") addFoodItem();
                 });
